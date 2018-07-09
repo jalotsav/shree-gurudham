@@ -35,6 +35,7 @@ import android.widget.TextView;
 import com.jalotsav.shreegurudham.common.AppConstants;
 import com.jalotsav.shreegurudham.common.UserSessionManager;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntHome;
+import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntInDevelopment;
 
 import java.util.Locale;
 
@@ -145,37 +146,37 @@ public class ActvtyMain extends AppCompatActivity implements AppConstants, Navig
                 return true;
             case R.id.action_nvgtndrwr_main_aboutus:
 
-                fragment = new FrgmntHome();
+                fragment = new FrgmntInDevelopment();
                 mToolbar.setTitle(getString(R.string.aboutus_sml));
                 loadFragment(fragment, item);
                 return true;
             case R.id.action_nvgtndrwr_main_images:
 
-                fragment = new FrgmntHome();
+                fragment = new FrgmntInDevelopment();
                 mToolbar.setTitle(getString(R.string.images_sml));
                 loadFragment(fragment, item);
                 return true;
             case R.id.action_nvgtndrwr_main_videos:
 
-                fragment = new FrgmntHome();
+                fragment = new FrgmntInDevelopment();
                 mToolbar.setTitle(getString(R.string.videos_sml));
                 loadFragment(fragment, item);
                 return true;
             case R.id.action_nvgtndrwr_main_audios:
 
-                fragment = new FrgmntHome();
+                fragment = new FrgmntInDevelopment();
                 mToolbar.setTitle(getString(R.string.audios_sml));
                 loadFragment(fragment, item);
                 return true;
             case R.id.action_nvgtndrwr_main_news:
 
-                fragment = new FrgmntHome();
+                fragment = new FrgmntInDevelopment();
                 mToolbar.setTitle(getString(R.string.news_sml));
                 loadFragment(fragment, item);
                 return true;
             case R.id.action_nvgtndrwr_main_contactus:
 
-                fragment = new FrgmntHome();
+                fragment = new FrgmntInDevelopment();
                 mToolbar.setTitle(getString(R.string.contactus_sml));
                 loadFragment(fragment, item);
                 return true;

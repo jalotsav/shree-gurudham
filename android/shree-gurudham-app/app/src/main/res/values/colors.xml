@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#D32F2F</color>
-    <color name="colorPrimaryDark">#9A0B0D</color>
+    <color name="colorPrimaryDark">#902723</color>
     <color name="colorAccent">#21272B</color>
     <color name="colorPrimaryRed">#F44336</color>
     <color name="colorPrimaryDarkRed">#D32F2F</color>
@@ -99,6 +99,7 @@
 
     <!--Use in App-->
     <color name="window_bg">#607D8B</color>
+    <color name="content_bg">#F2D799</color>
     <color name="grdntstart_red">#FE5393</color>
     <color name="grdntend_red">#FA6773</color>
     <color name="grdntcenter_red">#FC5B85</color>

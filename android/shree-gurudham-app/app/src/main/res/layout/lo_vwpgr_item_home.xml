@@ -14,13 +14,17 @@
   ~ limitations under the License.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <item
-        android:id="@+id/action_language"
-        android:icon="@drawable/ic_action_language"
-        android:orderInCategory="100"
-        android:title="@string/languages_sml"
-        app:showAsAction="always" />
-</menu>
+    <ImageView
+        android:id="@+id/imgvw_vgpgr_item_home_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/img_home_slider_default"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/imgcd_image"
+        android:scaleType="centerCrop" />
+</LinearLayout>

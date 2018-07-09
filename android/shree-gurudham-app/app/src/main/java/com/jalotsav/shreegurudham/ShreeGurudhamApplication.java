@@ -2,7 +2,6 @@ package com.jalotsav.shreegurudham;
 
 import android.app.Application;
 import android.content.res.Configuration;
-import android.widget.Toast;
 
 import com.jalotsav.shreegurudham.common.UserSessionManager;
 
@@ -38,7 +37,6 @@ public class ShreeGurudhamApplication extends Application {
     // Set current language to application LOCALE
     private void setLanguageToAppLocale(String currentLanguage) {
 
-        Toast.makeText(this, "Lang: " + currentLanguage, Toast.LENGTH_SHORT).show();
         Locale locale = new Locale(currentLanguage.toLowerCase());
         Locale.setDefault(locale);
         Configuration config = new Configuration();
