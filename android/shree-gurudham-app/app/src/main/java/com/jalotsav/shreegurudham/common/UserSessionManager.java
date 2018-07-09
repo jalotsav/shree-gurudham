@@ -1,0 +1,41 @@
+package com.jalotsav.shreegurudham.common;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+/**
+ * Created by Jalotsav on 7/7/2018.
+ */
+public class UserSessionManager implements AppConstants {
+
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+    private Context mContext;
+
+    // All Shared Preferences Keys
+    // Is User SignIn or not
+    private static final String IS_USER_LOGIN = "isUserLoggedIn";
+
+    // Constructor
+    public UserSessionManager(Context context) {
+
+        this.mContext = context;
+        String PREFER_NAME = mContext.getPackageName() + "_shrdprfrnc";
+        int PRIVATE_MODE = 0;
+        pref = mContext.getSharedPreferences(PREFER_NAME, PRIVATE_MODE);
+        editor = pref.edit();
+        editor.apply();
+    }
+
+    // Get-Set Selected Language to SharedPreferences
+    public String getSelectedLanguage() {
+
+        return pref.getString(KEY_SELECTED_LANGUAGE, LANGUAGE_SHORT_ENGLISH);
+    }
+
+    public void setSelectedLanguage(String selectedLanguage) {
+
+        editor.putString(KEY_SELECTED_LANGUAGE, selectedLanguage);
+        editor.commit();
+    }
+}

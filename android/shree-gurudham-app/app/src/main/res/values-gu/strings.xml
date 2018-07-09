@@ -1,4 +1,4 @@
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2018 Jalotsav
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,23 +15,23 @@
   -->
 
 <resources>
-    <string name="app_name">Shree Gurudham</string>
+    <string name="app_name">શ્રી ગુરુધામ</string>
     <string name="imgcd_image">Content description of images</string>
 
     <!--Navigation View-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="home_sml">Home</string>
-    <string name="aboutus_sml">About Us</string>
-    <string name="gallery_sml">Gallery</string>
-    <string name="images_sml">Images</string>
-    <string name="videos_sml">Videos</string>
-    <string name="audios_sml">Audios</string>
-    <string name="news_sml">News</string>
-    <string name="contactus_sml">Contact Us</string>
+    <string name="home_sml">હોમ</string>
+    <string name="aboutus_sml">અમારા વિશે</string>
+    <string name="gallery_sml">ચિત્રખંડ</string>
+    <string name="images_sml">છબીઓ</string>
+    <string name="videos_sml">વિડિઓઝ</string>
+    <string name="audios_sml">ઑડિઓઝ</string>
+    <string name="news_sml">સમાચાર</string>
+    <string name="contactus_sml">અમારો સંપર્ક</string>
 
     <!--Languages-->
-    <string name="languages_sml">Languages</string>
+    <string name="languages_sml">ભાષાઓ</string>
     <string name="english_sml">English</string>
-    <string name="gujarati_sml">Gujarati</string>
+    <string name="gujarati_sml">ગુજરાતી</string>
 </resources>

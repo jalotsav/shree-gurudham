@@ -16,6 +16,8 @@
 
 package com.jalotsav.shreegurudham;
 
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -31,7 +33,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jalotsav.shreegurudham.common.AppConstants;
+import com.jalotsav.shreegurudham.common.UserSessionManager;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntHome;
+
+import java.util.Locale;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -40,14 +45,14 @@ import butterknife.ButterKnife;
 /**
  * Created by Jalotsav on 7/6/2018.
  */
-public class ActvtyMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ActvtyMain extends AppCompatActivity implements AppConstants, NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.toolbar_drwrlyot_appbar_main) Toolbar mToolbar;
     @BindView(R.id.drwrlyot_nvgtndrwr_main) DrawerLayout mDrwrlyot;
     @BindView(R.id.navgtnvw_nvgtndrwr_main) NavigationView mNavgtnVw;
 
     MenuItem mMenuItemHome, mMenuItemAboutUs, mMenuItemImages, mMenuItemVideos, mMenuItemAudios, mMenuItemNews, mMenuItemContactUs;
-//    UserSessionManager session;
+    UserSessionManager session;
     Bundle mBundle;
 
     @Override
@@ -58,39 +63,66 @@ public class ActvtyMain extends AppCompatActivity implements NavigationView.OnNa
 
         setSupportActionBar(mToolbar);
 
-//        session = new UserSessionManager(this);
+        session = new UserSessionManager(this);
 
-//        if(session.checkLogin()) {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrwrlyot, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrwrlyot.addDrawerListener(toggle);
+        toggle.syncState();
 
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                    this, mDrwrlyot, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            mDrwrlyot.addDrawerListener(toggle);
-            toggle.syncState();
+        mNavgtnVw.setNavigationItemSelectedListener(this);
 
-            mNavgtnVw.setNavigationItemSelectedListener(this);
-
-            // load Projects fragment by default
-            int navgtnPosition = getIntent().getIntExtra(AppConstants.PUT_EXTRA_NVGTNVW_POSTN, AppConstants.NVGTNVW_HOME);
-            onNavigationItemSelected(getNavgtnvwPositionMenuItem(navgtnPosition));
-//        }
+        // load Projects fragment by default
+        int navgtnPosition = getIntent().getIntExtra(PUT_EXTRA_NVGTNVW_POSTN, NVGTNVW_HOME);
+        onNavigationItemSelected(getNavgtnvwPositionMenuItem(navgtnPosition));
+        setToolbarTitle(getToolbarTitle(navgtnPosition));
     }
 
     // Get MenuItem from BottomNavigationView Position, which is get from getIntent()
     private MenuItem getNavgtnvwPositionMenuItem(int navgtnPosition) {
 
         switch (navgtnPosition) {
-            case AppConstants.NVGTNVW_HOME:
+            case NVGTNVW_HOME:
 
                 return mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_home);
-            case AppConstants.NVGTNVW_NEWS:
+            case NVGTNVW_NEWS:
 
                 return mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_news);
-            case AppConstants.NVGTNVW_CONTACTUS:
+            case NVGTNVW_CONTACTUS:
 
                 return mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_contactus);
             default:
 
                 return mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_home);
+        }
+    }
+
+    // Get MenuItem from BottomNavigationView Position, which is get from getIntent()
+    private String getToolbarTitle(int navgtnPosition) {
+
+        switch (navgtnPosition) {
+            case NVGTNVW_HOME:
+
+                return getString(R.string.home_sml);
+            case NVGTNVW_NEWS:
+
+                return getString(R.string.news_sml);
+            case NVGTNVW_CONTACTUS:
+
+                return getString(R.string.contactus_sml);
+            default:
+
+                return getString(R.string.home_sml);
+        }
+    }
+
+    // Set Toolbar title
+    private void setToolbarTitle(String toolbarTitle) {
+
+        try {
+            getSupportActionBar().setTitle(toolbarTitle);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -101,7 +133,7 @@ public class ActvtyMain extends AppCompatActivity implements NavigationView.OnNa
         if(mBundle == null) {
 
             mBundle = new Bundle();
-            mBundle.putInt(AppConstants.PUT_EXTRA_COME_FROM, 0);
+            mBundle.putInt(PUT_EXTRA_COME_FROM, 0);
         }
 
         switch (item.getItemId()) {

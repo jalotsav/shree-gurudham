@@ -24,6 +24,12 @@ public interface AppConstants {
     // Build Type
     String BUILD_TYPE_DEBUG = "debug";
 
+    String KEY_SELECTED_LANGUAGE = "selectedLanguage";
+
+    // Language short code
+    String LANGUAGE_SHORT_ENGLISH = "en";
+    String LANGUAGE_SHORT_GUJARATI = "gu";
+
     // PutExtra Keys
     String PUT_EXTRA_COME_FROM = "comeFrom";
     String PUT_EXTRA_NVGTNVW_POSTN = "nvgtnvwPosition";
