@@ -27,26 +27,29 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.jalotsav.shreegurudham.common.AppConstants;
 import com.jalotsav.shreegurudham.common.UserSessionManager;
+import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntAlbumsImages;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntHome;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntInDevelopment;
 
 import java.util.Locale;
 
-import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
  * Created by Jalotsav on 7/6/2018.
  */
-public class ActvtyMain extends AppCompatActivity implements AppConstants, NavigationView.OnNavigationItemSelectedListener {
+public class ActvtyMain extends AppCompatActivity implements AppConstants,
+        NavigationView.OnNavigationItemSelectedListener, PopupMenu.OnMenuItemClickListener {
 
     @BindView(R.id.toolbar_drwrlyot_appbar_main) Toolbar mToolbar;
     @BindView(R.id.drwrlyot_nvgtndrwr_main) DrawerLayout mDrwrlyot;
@@ -75,23 +78,35 @@ public class ActvtyMain extends AppCompatActivity implements AppConstants, Navig
 
         // load Projects fragment by default
         int navgtnPosition = getIntent().getIntExtra(PUT_EXTRA_NVGTNVW_POSTN, NVGTNVW_HOME);
-        onNavigationItemSelected(getNavgtnvwPositionMenuItem(navgtnPosition));
+        onNavigationItemSelected(getMenuItemFromNavgtnvwPosition(navgtnPosition));
         setToolbarTitle(getToolbarTitle(navgtnPosition));
     }
 
-    // Get MenuItem from BottomNavigationView Position, which is get from getIntent()
-    private MenuItem getNavgtnvwPositionMenuItem(int navgtnPosition) {
+    // Get MenuItem from NavigationView Position, which is get from getIntent()
+    private MenuItem getMenuItemFromNavgtnvwPosition(int navgtnPosition) {
 
         switch (navgtnPosition) {
             case NVGTNVW_HOME:
 
                 return mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_home);
+            case NVGTNVW_ABOUTUS:
+
+                return mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_aboutus);
             case NVGTNVW_NEWS:
 
                 return mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_news);
             case NVGTNVW_CONTACTUS:
 
                 return mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_contactus);
+            case NVGTNVW_IMAGES:
+
+                return mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_images);
+            case NVGTNVW_VIDEOS:
+
+                return mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_videos);
+            case NVGTNVW_AUDIOS:
+
+                return mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_audios);
             default:
 
                 return mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_home);
@@ -105,12 +120,24 @@ public class ActvtyMain extends AppCompatActivity implements AppConstants, Navig
             case NVGTNVW_HOME:
 
                 return getString(R.string.home_sml);
+            case NVGTNVW_ABOUTUS:
+
+                return getString(R.string.aboutus_sml);
             case NVGTNVW_NEWS:
 
                 return getString(R.string.news_sml);
             case NVGTNVW_CONTACTUS:
 
                 return getString(R.string.contactus_sml);
+            case NVGTNVW_IMAGES:
+
+                return getString(R.string.images_sml);
+            case NVGTNVW_VIDEOS:
+
+                return getString(R.string.videos_sml);
+            case NVGTNVW_AUDIOS:
+
+                return getString(R.string.audios_sml);
             default:
 
                 return getString(R.string.home_sml);
@@ -152,7 +179,7 @@ public class ActvtyMain extends AppCompatActivity implements AppConstants, Navig
                 return true;
             case R.id.action_nvgtndrwr_main_images:
 
-                fragment = new FrgmntInDevelopment();
+                fragment = new FrgmntAlbumsImages();
                 mToolbar.setTitle(getString(R.string.images_sml));
                 loadFragment(fragment, item);
                 return true;
@@ -233,6 +260,90 @@ public class ActvtyMain extends AppCompatActivity implements AppConstants, Navig
             currntSelctdMenuItem = mMenuItemHome;
 
         return currntSelctdMenuItem;
+    }
+
+    // Create LANGUAGES popup menu
+    private void createLanguagesPopupMenu(MenuItem item) {
+
+        View menuItemView = findViewById(item.getItemId());
+        PopupMenu popup = new PopupMenu(this, menuItemView);
+        MenuInflater inflate = popup.getMenuInflater();
+        inflate.inflate(R.menu.menu_languages_item, popup.getMenu());
+        popup.setOnMenuItemClickListener(this);
+        popup.show();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_languages_item_english:
+
+                session.setSelectedLanguage(LANGUAGE_SHORT_ENGLISH);
+                setLanguageToAppLocale(session.getSelectedLanguage());
+                return true;
+            case R.id.action_languages_item_gujarati:
+
+                session.setSelectedLanguage(LANGUAGE_SHORT_GUJARATI);
+                setLanguageToAppLocale(session.getSelectedLanguage());
+                return true;
+        }
+        return false;
+    }
+
+    // Set selected language to application LOCALE
+    private void setLanguageToAppLocale(String currentLanguage) {
+
+        Locale locale = new Locale(currentLanguage.toLowerCase());
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+
+        finish();
+        startActivity(new Intent(this, ActvtyMain.class)
+                .putExtra(PUT_EXTRA_NVGTNVW_POSTN, getNavgtnvwPositionFromMenuItem(getCurrentCheckedMenuItem())));
+        overridePendingTransition(0, 0);
+    }
+
+    // Get NavigationView Position from MenuItem
+    private int getNavgtnvwPositionFromMenuItem(MenuItem menuItem) {
+
+        if(menuItem == mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_home))
+            return NVGTNVW_HOME;
+        else if(menuItem == mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_aboutus))
+            return NVGTNVW_ABOUTUS;
+        else if(menuItem == mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_news))
+            return NVGTNVW_NEWS;
+        else if(menuItem == mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_contactus))
+            return NVGTNVW_CONTACTUS;
+        else if(menuItem == mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_images))
+            return NVGTNVW_IMAGES;
+        else if(menuItem == mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_videos))
+            return NVGTNVW_VIDEOS;
+        else if(menuItem == mNavgtnVw.getMenu().findItem(R.id.action_nvgtndrwr_main_audios))
+            return NVGTNVW_AUDIOS;
+        else
+            return NVGTNVW_HOME;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_nvgtnvw_main_overflow, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_language:
+
+                createLanguagesPopupMenu(item);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

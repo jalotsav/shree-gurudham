@@ -16,81 +16,78 @@
 
 package com.jalotsav.shreegurudham.nvgtnvwmain;
 
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.jalotsav.shreegurudham.ActvtyMain;
 import com.jalotsav.shreegurudham.R;
-import com.jalotsav.shreegurudham.adapter.VwpgrHomeSliderAdapter;
-import com.jalotsav.shreegurudham.common.AppConstants;
+import com.jalotsav.shreegurudham.adapter.RcyclrAlbumsImagesAdapter;
 import com.jalotsav.shreegurudham.common.GeneralFunctions;
-import com.jalotsav.shreegurudham.common.UserSessionManager;
-import com.jalotsav.shreegurudham.models.home.MdlHomeResData;
+import com.jalotsav.shreegurudham.common.RecyclerViewEmptySupport;
+import com.jalotsav.shreegurudham.models.images.MdlAlbumsImagesResData;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import butterknife.BindDrawable;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.relex.circleindicator.CircleIndicator;
 
 /**
- * Created by Jalotsav on 7/6/2018.
+ * Created by Jalotsav on 7/10/2018.
  */
-public class FrgmntHome extends Fragment implements AppConstants, SwipeRefreshLayout.OnRefreshListener {
+public class FrgmntAlbumsImages extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.cordntrlyot_frgmnt_home) CoordinatorLayout mCrdntrlyot;
-    @BindView(R.id.swiperfrshlyot_frgmnt_home) SwipeRefreshLayout mSwiperfrshlyot;
-    @BindView(R.id.vwpgr_frgmnt_home) ViewPager mViewPager;
-    @BindView(R.id.vwpgr_frgmnt_home_slidrindictr) CircleIndicator mSliderIndictr;
+    @BindView(R.id.cordntrlyot_frgmnt_albums_images) CoordinatorLayout mCrdntrlyot;
+    @BindView(R.id.swiperfrshlyot_frgmnt_albums_images) SwipeRefreshLayout mSwiperfrshlyot;
+    @BindView(R.id.lnrlyot_recyclremptyvw_appearhere) LinearLayout mLnrlyotAppearHere;
+    @BindView(R.id.tv_recyclremptyvw_appearhere) TextView mTvAppearHere;
+    @BindView(R.id.rcyclrvw_frgmnt_albums_images) RecyclerViewEmptySupport mRecyclerView;
 
+    @BindString(R.string.images_appear_here) String mImagesAppearHere;
     @BindString(R.string.no_intrnt_cnctn) String mNoInternetConnMsg;
-    @BindString(R.string.server_problem_sml) String mServerPrblmMsg;
-    @BindString(R.string.internal_problem_sml) String mInternalPrblmMsg;
 
     @BindDrawable(R.drawable.img_home_slider_default) Drawable mDrwblDefault;
 
-    UserSessionManager session;
-    VwpgrHomeSliderAdapter mSliderAdapter;
-    ArrayList<MdlHomeResData> mArrylstMdlDashbrdResData;
+    RecyclerView.LayoutManager mLayoutManager;
+    RcyclrAlbumsImagesAdapter mAdapter;
+    ArrayList<MdlAlbumsImagesResData> mArrylstMdlAlbumsImages;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.lo_frgmnt_home, container, false);
+        View rootView = inflater.inflate(R.layout.lo_frgmnt_albums_images, container, false);
         ButterKnife.bind(this, rootView);
+
+        setHasOptionsMenu(true);
 
         initSwipeRefreshLayout();
 
-        session = new UserSessionManager(getActivity());
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setEmptyView(mLnrlyotAppearHere);
 
-        mArrylstMdlDashbrdResData = new ArrayList<>();
-        mArrylstMdlDashbrdResData.add(new MdlHomeResData(null));
+        mTvAppearHere.setText(mImagesAppearHere);
 
-        mSliderAdapter = new VwpgrHomeSliderAdapter(getActivity(), mArrylstMdlDashbrdResData, mDrwblDefault);
-        mViewPager.setAdapter(mSliderAdapter);
-        mSliderIndictr.setViewPager(mViewPager);
+        mArrylstMdlAlbumsImages = new ArrayList<>();
+        mAdapter = new RcyclrAlbumsImagesAdapter(getActivity(), mArrylstMdlAlbumsImages, mDrwblDefault);
+        mRecyclerView.setAdapter(mAdapter);
 
         callOnRefresh();
 
@@ -119,25 +116,29 @@ public class FrgmntHome extends Fragment implements AppConstants, SwipeRefreshLa
     public void onRefresh() {
 
         if(GeneralFunctions.isNetConnected(getActivity()))
-            fetchHomeData();
+            fetchImagesData();
         else {
             mSwiperfrshlyot.setRefreshing(false);
             Snackbar.make(mCrdntrlyot, mNoInternetConnMsg, Snackbar.LENGTH_LONG).show();
         }
     }
 
-    // call API for Get Home data
-    private void fetchHomeData() {
+    // call API for Get Images List
+    private void fetchImagesData() {
 
-        mSwiperfrshlyot.setRefreshing(false);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
-        mArrylstMdlDashbrdResData = new ArrayList<>();
-        mArrylstMdlDashbrdResData.add(new MdlHomeResData("https://img.youtube.com/vi/J4c92aL6VlQ/0.jpg"));
-        mArrylstMdlDashbrdResData.add(new MdlHomeResData("https://img.youtube.com/vi/8G0FH3SCg4g/0.jpg"));
-        mArrylstMdlDashbrdResData.add(new MdlHomeResData("https://img.youtube.com/vi/jMLoiSeJzcI/0.jpg"));
+                mSwiperfrshlyot.setRefreshing(false);
 
-        mSliderAdapter = new VwpgrHomeSliderAdapter(getActivity(), mArrylstMdlDashbrdResData, mDrwblDefault);
-        mViewPager.setAdapter(mSliderAdapter);
-        mSliderIndictr.setViewPager(mViewPager);
+                mArrylstMdlAlbumsImages = new ArrayList<>();
+                mArrylstMdlAlbumsImages.add(new MdlAlbumsImagesResData(getString(R.string.app_name), "https://img.youtube.com/vi/J4c92aL6VlQ/0.jpg"));
+                mArrylstMdlAlbumsImages.add(new MdlAlbumsImagesResData(getString(R.string.app_name), "https://img.youtube.com/vi/8G0FH3SCg4g/0.jpg"));
+
+                mAdapter = new RcyclrAlbumsImagesAdapter(getActivity(), mArrylstMdlAlbumsImages, mDrwblDefault);
+                mRecyclerView.setAdapter(mAdapter);
+            }
+        }, 3000);
     }
 }

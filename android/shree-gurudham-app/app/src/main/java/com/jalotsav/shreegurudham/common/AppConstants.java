@@ -24,6 +24,12 @@ public interface AppConstants {
     // Build Type
     String BUILD_TYPE_DEBUG = "debug";
 
+    // Web-Service Keys
+    String KEY_STATUS_SML = "status";
+    String KEY_SHOW_MSG_SML = "show_msg";
+    String KEY_MESSAGE_SML = "message";
+    String KEY_DATA_SML = "data";
+
     String KEY_SELECTED_LANGUAGE = "selectedLanguage";
 
     // Language short code
@@ -36,6 +42,10 @@ public interface AppConstants {
 
     // NavigationView Drawer MenuItem position check for direct open that fragment
     int NVGTNVW_HOME = 21;
-    int NVGTNVW_NEWS = 22;
-    int NVGTNVW_CONTACTUS = 23;
+    int NVGTNVW_ABOUTUS = 22;
+    int NVGTNVW_NEWS = 23;
+    int NVGTNVW_CONTACTUS = 24;
+    int NVGTNVW_IMAGES = 25;
+    int NVGTNVW_VIDEOS = 26;
+    int NVGTNVW_AUDIOS = 27;
 }

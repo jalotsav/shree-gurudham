@@ -19,7 +19,6 @@
     <string name="no_intrnt_cnctn">કોઈ કનેક્શન ઉપલબ્ધ નથી.</string>
     <string name="server_problem_sml">કેટલીક સર્વર સમસ્યા છે.</string>
     <string name="internal_problem_sml">કેટલીક આંતરિક સમસ્યા છે.</string>
-    <string name="refresh_sml">રીફ્રેશ</string>
 
     <!--Navigation View-->
     <string name="home_sml">હોમ</string>
@@ -39,4 +38,7 @@
     <!--Home-->
     <string name="home_title_msg">શ્રી શિવ શક્તિ ગુરુ-ગૌધામ આનંદ આશ્રમ દેકાવાડા</string>
     <string name="home_descrptn_msg">જગતજનની બહુચરમાતા નો જ્યાં પ્રાદુભાર્વ થયો એવા ચુંવાળ પંથક માં આવેલ શિવશક્તિ ગુરુધામ દેકાવાડા અમદાવાદ જીલ્લા માં દેત્રોજ પાસે આવેલું છે.</string>
+
+    <!--Images-->
+    <string name="images_appear_here">છબીઓ અહીં દેખાશે</string>
 </resources>
