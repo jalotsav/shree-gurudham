@@ -39,6 +39,8 @@ public interface AppConstants {
     // PutExtra Keys
     String PUT_EXTRA_COME_FROM = "comeFrom";
     String PUT_EXTRA_NVGTNVW_POSTN = "nvgtnvwPosition";
+    String PUT_EXTRA_ALBUM_NAME = "albumName";
+    String PUT_EXTRA_IMAGE_URL = "imageUrl";
 
     // NavigationView Drawer MenuItem position check for direct open that fragment
     int NVGTNVW_HOME = 21;

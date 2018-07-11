@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class MdlAlbumsImagesRes implements AppConstants {
 
     @SerializedName(KEY_STATUS_SML)
-    private boolean success;
+    private boolean status;
     @SerializedName(KEY_SHOW_MSG_SML)
     private boolean showMsg;
     @SerializedName(KEY_MESSAGE_SML)
@@ -35,12 +35,12 @@ public class MdlAlbumsImagesRes implements AppConstants {
     @SerializedName(KEY_DATA_SML)
     private ArrayList<MdlAlbumsImagesResData> arrylstMdlAlbumsImagesData;
 
-    public boolean isSuccess() {
-        return success;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public boolean isShowMsg() {

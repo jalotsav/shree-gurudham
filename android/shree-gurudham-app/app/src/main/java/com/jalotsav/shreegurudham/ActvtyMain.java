@@ -113,7 +113,7 @@ public class ActvtyMain extends AppCompatActivity implements AppConstants,
         }
     }
 
-    // Get MenuItem from BottomNavigationView Position, which is get from getIntent()
+    // Get Toolbar title from NavigationView position
     private String getToolbarTitle(int navgtnPosition) {
 
         switch (navgtnPosition) {

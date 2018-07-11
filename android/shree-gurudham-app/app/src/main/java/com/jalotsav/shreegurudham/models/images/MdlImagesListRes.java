@@ -16,32 +16,22 @@
 
 package com.jalotsav.shreegurudham.models.images;
 
+import com.google.gson.annotations.SerializedName;
+import com.jalotsav.shreegurudham.common.AppConstants;
+
+import java.util.ArrayList;
+
 /**
- * Created by Jalotsav on 7/10/2018.
+ * Created by Jalotsav on 7/11/2018.
  */
-public class MdlAlbumsImagesResData {
+public class MdlImagesListRes implements AppConstants {
 
-    private String name;
-    private String coverImageURL;
-
-    public MdlAlbumsImagesResData(String name, String coverImageURL) {
-        this.name = name;
-        this.coverImageURL = coverImageURL;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCoverImageURL() {
-        return coverImageURL;
-    }
-
-    public void setCoverImageURL(String coverImageURL) {
-        this.coverImageURL = coverImageURL;
-    }
+    @SerializedName(KEY_STATUS_SML)
+    private boolean status;
+    @SerializedName(KEY_SHOW_MSG_SML)
+    private boolean showMsg;
+    @SerializedName(KEY_MESSAGE_SML)
+    private String message;
+    @SerializedName(KEY_DATA_SML)
+    private ArrayList<MdlImagesListResData> arrylstMdlImagesListResData;
 }

@@ -26,31 +26,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.jalotsav.shreegurudham.ActvtyImagesList;
+import com.jalotsav.shreegurudham.ActvtyPreviewImage;
 import com.jalotsav.shreegurudham.R;
 import com.jalotsav.shreegurudham.common.AppConstants;
-import com.jalotsav.shreegurudham.models.images.MdlAlbumsImagesResData;
+import com.jalotsav.shreegurudham.models.images.MdlImagesListResData;
 
 import java.util.ArrayList;
 
 /**
- * Created by Jalotsav on 7/10/2018.
+ * Created by Jalotsav on 7/11/2018.
  */
-public class RcyclrAlbumsImagesAdapter extends RecyclerView.Adapter<RcyclrAlbumsImagesAdapter.ViewHolder> {
+public class RcyclrImagesListAdapter extends RecyclerView.Adapter<RcyclrImagesListAdapter.ViewHolder> {
 
     private Context mContext;
-    private ArrayList<MdlAlbumsImagesResData> mArrylstAlbumsImages;
+    private ArrayList<MdlImagesListResData> mArrylstImages;
     private Drawable mDrwblDefault;
 
-    public RcyclrAlbumsImagesAdapter(Context context, ArrayList<MdlAlbumsImagesResData> arrylstAlbumsImages, Drawable drwblDefault) {
+    public RcyclrImagesListAdapter(Context context, ArrayList<MdlImagesListResData> arrylstImages, Drawable drwblDefault) {
 
         mContext = context;
-        mArrylstAlbumsImages = new ArrayList<>();
-        mArrylstAlbumsImages.addAll(arrylstAlbumsImages);
+        mArrylstImages = new ArrayList<>();
+        mArrylstImages.addAll(arrylstImages);
         mDrwblDefault = drwblDefault;
     }
 
@@ -58,7 +57,7 @@ public class RcyclrAlbumsImagesAdapter extends RecyclerView.Adapter<RcyclrAlbums
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.lo_recyclritem_albums_images, parent, false);
+        View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.lo_recyclritem_images_list, parent, false);
 
         return new ViewHolder(mView);
     }
@@ -66,9 +65,7 @@ public class RcyclrAlbumsImagesAdapter extends RecyclerView.Adapter<RcyclrAlbums
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
-        final MdlAlbumsImagesResData objMdlAlbumsImages = mArrylstAlbumsImages.get(position);
-        holder.mTvName.setText(objMdlAlbumsImages.getName());
-        String imageURL = objMdlAlbumsImages.getCoverImageURL();
+        final String imageURL = mArrylstImages.get(position).getImageURL();
         if(!TextUtils.isEmpty(imageURL)) {
             Glide.with(mContext)
                     .load(imageURL)
@@ -80,59 +77,27 @@ public class RcyclrAlbumsImagesAdapter extends RecyclerView.Adapter<RcyclrAlbums
             @Override
             public void onClick(View view) {
 
-                mContext.startActivity(new Intent(mContext, ActvtyImagesList.class)
-                        .putExtra(AppConstants.PUT_EXTRA_ALBUM_NAME, objMdlAlbumsImages.getName()));
+                mContext.startActivity(new Intent(mContext, ActvtyPreviewImage.class)
+                        .putExtra(AppConstants.PUT_EXTRA_IMAGE_URL, imageURL));
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mArrylstAlbumsImages.size();
+        return mArrylstImages.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
         View mItemView;
         ImageView mImgvwImage;
-        TextView mTvName;
 
         ViewHolder(View itemView) {
             super(itemView);
 
             this.mItemView = itemView;
-            mImgvwImage = itemView.findViewById(R.id.imgvw_recylrvw_item_albums_images_image);
-            mTvName = itemView.findViewById(R.id.tv_recylrvw_item_albums_images_name);
+            mImgvwImage = itemView.findViewById(R.id.imgvw_recylrvw_item_images_list_image);
         }
-    }
-
-    // Remove item at given position
-    private void removeAt(int position) {
-
-        mArrylstAlbumsImages.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mArrylstAlbumsImages.size());
-        notifyDataSetChanged();
-    }
-
-    // Add new Item at last position
-    public void addItem(MdlAlbumsImagesResData mdlAlbumsImages) {
-
-        mArrylstAlbumsImages.add(mdlAlbumsImages);
-        notifyItemInserted(mArrylstAlbumsImages.size() - 1);
-        notifyDataSetChanged();
-    }
-
-    // Get All Items
-    public ArrayList<MdlAlbumsImagesResData> getAllItems() {
-        return this.mArrylstAlbumsImages;
-    }
-
-    // Set Filter and Notify
-    public void setFilter(ArrayList<MdlAlbumsImagesResData> arrylstAlbumsImages) {
-
-        mArrylstAlbumsImages = new ArrayList<>();
-        mArrylstAlbumsImages.addAll(arrylstAlbumsImages);
-        notifyDataSetChanged();
     }
 }

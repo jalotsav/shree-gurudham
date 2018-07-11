@@ -54,6 +54,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- AppTheme Translucent ActionBar Style -->
+    <style name="AppTheme.TranslucentActionBar">
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark" />
     <style name="AppTheme.AppBarOverlayLight" parent="ThemeOverlay.AppCompat.Light" />
     <style name="AppTheme.AppBarOverlayActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

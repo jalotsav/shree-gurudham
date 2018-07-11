@@ -42,6 +42,14 @@
             android:name=".ActvtyMain"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NavigationNoActionBar" />
+        <activity
+            android:name=".ActvtyImagesList"
+            android:label="@string/images_sml"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActvtyPreviewImage"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TranslucentActionBar" />
     </application>
 
 </manifest>
