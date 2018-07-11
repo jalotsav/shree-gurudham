@@ -44,4 +44,7 @@
 
     <!--Images-->
     <string name="images_appear_here">Images appear here</string>
+
+    <!--Videos-->
+    <string name="videos_appear_here">Videos appear here</string>
 </resources>
