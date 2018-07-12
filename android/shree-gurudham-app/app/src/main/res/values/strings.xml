@@ -20,6 +20,7 @@
     <string name="no_intrnt_cnctn">No connection available.</string>
     <string name="server_problem_sml">There are some server problem.</string>
     <string name="internal_problem_sml">There are some internal problem.</string>
+    <string name="youtube_player_error_sml">Error initializing YouTube player: %s</string>
 
     <!--Navigation View-->
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>

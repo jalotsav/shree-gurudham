@@ -19,6 +19,7 @@
     <string name="no_intrnt_cnctn">કોઈ કનેક્શન ઉપલબ્ધ નથી.</string>
     <string name="server_problem_sml">કેટલીક સર્વર સમસ્યા છે.</string>
     <string name="internal_problem_sml">કેટલીક આંતરિક સમસ્યા છે.</string>
+    <string name="youtube_player_error_sml">યુટુબ પ્લેયર પ્રારંભ કરવામાં ભૂલ: %s</string>
 
     <!--Navigation View-->
     <string name="home_sml">હોમ</string>

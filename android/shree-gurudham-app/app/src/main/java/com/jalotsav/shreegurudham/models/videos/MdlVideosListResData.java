@@ -6,13 +6,11 @@ package com.jalotsav.shreegurudham.models.videos;
 public class MdlVideosListResData {
 
     private String title;
-    private String thumbnailImageURL;
-    private String videoURL;
+    private String youtubeVideoID;
 
-    public MdlVideosListResData(String title, String thumbnailImageURL, String videoURL) {
+    public MdlVideosListResData(String title, String youtubeVideoID) {
         this.title = title;
-        this.thumbnailImageURL = thumbnailImageURL;
-        this.videoURL = videoURL;
+        this.youtubeVideoID = youtubeVideoID;
     }
 
     public String getTitle() {
@@ -23,19 +21,11 @@ public class MdlVideosListResData {
         this.title = title;
     }
 
-    public String getThumbnailImageURL() {
-        return thumbnailImageURL;
+    public String getYoutubeVideoID() {
+        return youtubeVideoID;
     }
 
-    public void setThumbnailImageURL(String thumbnailImageURL) {
-        this.thumbnailImageURL = thumbnailImageURL;
-    }
-
-    public String getVideoURL() {
-        return videoURL;
-    }
-
-    public void setVideoURL(String videoURL) {
-        this.videoURL = videoURL;
+    public void setYoutubeVideoID(String youtubeVideoID) {
+        this.youtubeVideoID = youtubeVideoID;
     }
 }

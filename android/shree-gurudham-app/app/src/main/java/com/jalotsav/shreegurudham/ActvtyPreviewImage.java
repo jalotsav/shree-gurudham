@@ -44,7 +44,7 @@ public class ActvtyPreviewImage extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lo_actvty_previewimage);
+        setContentView(R.layout.lo_actvty_preview_image);
         ButterKnife.bind(this);
 
         try {

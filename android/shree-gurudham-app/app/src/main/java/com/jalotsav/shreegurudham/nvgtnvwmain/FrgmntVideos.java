@@ -133,8 +133,8 @@ public class FrgmntVideos extends Fragment implements SwipeRefreshLayout.OnRefre
                 mSwiperfrshlyot.setRefreshing(false);
 
                 mArrylstMdlVideos = new ArrayList<>();
-                mArrylstMdlVideos.add(new MdlVideosListResData(getString(R.string.app_name), "https://img.youtube.com/vi/J4c92aL6VlQ/0.jpg", "https://www.youtube.com/watch?v=J4c92aL6VlQ"));
-                mArrylstMdlVideos.add(new MdlVideosListResData(getString(R.string.app_name), "https://img.youtube.com/vi/8G0FH3SCg4g/0.jpg", "https://www.youtube.com/watch?v=8G0FH3SCg4g"));
+                mArrylstMdlVideos.add(new MdlVideosListResData("Shree Purushottamlalji Maharaj", "jMLoiSeJzcI"));
+                mArrylstMdlVideos.add(new MdlVideosListResData("Rajkot Katha Day -1 Kalidasji Bapu", "luzfr0kThas"));
 
                 mAdapter = new RcyclrVideosAdapter(getActivity(), mArrylstMdlVideos, mDrwblDefault);
                 mRecyclerView.setAdapter(mAdapter);

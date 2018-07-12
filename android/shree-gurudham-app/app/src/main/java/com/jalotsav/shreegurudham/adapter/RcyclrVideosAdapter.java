@@ -17,6 +17,7 @@
 package com.jalotsav.shreegurudham.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +30,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.jalotsav.shreegurudham.ActvtyPreviewVideo;
 import com.jalotsav.shreegurudham.R;
+import com.jalotsav.shreegurudham.common.AppConstants;
 import com.jalotsav.shreegurudham.models.videos.MdlVideosListResData;
 
 import java.util.ArrayList;
@@ -63,15 +66,24 @@ public class RcyclrVideosAdapter extends RecyclerView.Adapter<RcyclrVideosAdapte
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
-        MdlVideosListResData objMdlVideos = mArrylstVideos.get(position);
+        final MdlVideosListResData objMdlVideos = mArrylstVideos.get(position);
         holder.mTvTitle.setText(objMdlVideos.getTitle());
-        String imageURL = objMdlVideos.getThumbnailImageURL();
-        if(!TextUtils.isEmpty(imageURL)) {
+        if(!TextUtils.isEmpty(objMdlVideos.getYoutubeVideoID())) {
             Glide.with(mContext)
-                    .load(imageURL)
+                    .load(AppConstants.ROOT_URL_YOUTUBE_THUMBNAIL
+                            .concat(objMdlVideos.getYoutubeVideoID())
+                            .concat(AppConstants.YOUTUBE_THUMBNAIL_IMAGE_NAME))
                     .apply(new RequestOptions().placeholder(mDrwblDefault))
                     .into(holder.mImgvwImage);
         }
+        holder.mItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mContext.startActivity(new Intent(mContext, ActvtyPreviewVideo.class)
+                        .putExtra(AppConstants.PUT_EXTRA_YOUTUBE_VIDEOID, objMdlVideos.getYoutubeVideoID()));
+            }
+        });
     }
 
     @Override

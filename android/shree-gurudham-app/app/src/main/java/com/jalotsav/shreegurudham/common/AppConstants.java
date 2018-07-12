@@ -24,12 +24,17 @@ public interface AppConstants {
     // Build Type
     String BUILD_TYPE_DEBUG = "debug";
 
+    // URLs - Root, API
+    String ROOT_URL_YOUTUBE = "https://www.youtube.com/watch?v=";
+    String ROOT_URL_YOUTUBE_THUMBNAIL = "https://img.youtube.com/vi/";
+
     // Web-Service Keys
     String KEY_STATUS_SML = "status";
     String KEY_SHOW_MSG_SML = "show_msg";
     String KEY_MESSAGE_SML = "message";
     String KEY_DATA_SML = "data";
 
+    // User session manager Keys
     String KEY_SELECTED_LANGUAGE = "selectedLanguage";
 
     // Language short code
@@ -41,6 +46,7 @@ public interface AppConstants {
     String PUT_EXTRA_NVGTNVW_POSTN = "nvgtnvwPosition";
     String PUT_EXTRA_ALBUM_NAME = "albumName";
     String PUT_EXTRA_IMAGE_URL = "imageUrl";
+    String PUT_EXTRA_YOUTUBE_VIDEOID = "youtubeVideoID";
 
     // NavigationView Drawer MenuItem position check for direct open that fragment
     int NVGTNVW_HOME = 21;
@@ -50,4 +56,13 @@ public interface AppConstants {
     int NVGTNVW_IMAGES = 25;
     int NVGTNVW_VIDEOS = 26;
     int NVGTNVW_AUDIOS = 27;
+
+    // Request Keys
+    int REQUEST_RECOVERY = 101;
+
+    // API Key
+    String API_KEY_YOUTUBE = "AIzaSyAWoyaRh13Z1KEN23tedjCY-4ywXkCTaQ0";
+
+    // Miscellaneous
+    String YOUTUBE_THUMBNAIL_IMAGE_NAME = "/0.jpg";
 }
