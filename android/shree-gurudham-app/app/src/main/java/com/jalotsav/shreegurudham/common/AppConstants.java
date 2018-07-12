@@ -25,14 +25,23 @@ public interface AppConstants {
     String BUILD_TYPE_DEBUG = "debug";
 
     // URLs - Root, API
+    String ROOT_URL_API = "http://shreegurudham.com/apis/Default.aspx/";
     String ROOT_URL_YOUTUBE = "https://www.youtube.com/watch?v=";
     String ROOT_URL_YOUTUBE_THUMBNAIL = "https://img.youtube.com/vi/";
+    String API_GETPAGECONTENT = "getPageContent";
 
     // Web-Service Keys
     String KEY_STATUS_SML = "status";
     String KEY_SHOW_MSG_SML = "show_msg";
     String KEY_MESSAGE_SML = "message";
     String KEY_DATA_SML = "data";
+    String KEY_LANGUAGE_CODE_SML = "language_code";
+    String KEY_PAGE_KEY_SML = "page_key";
+    String KEY_PAGE_TITLE_CAPS = "PAGETITLE";
+    String KEY_MATTER_DESC_CAPS = "MATTERDESC";
+
+    // Web-Service Keys
+    String VALUE_ABOUT_SHIVPOOJA = "about_shivpooja";
 
     // User session manager Keys
     String KEY_SELECTED_LANGUAGE = "selectedLanguage";
@@ -64,5 +73,6 @@ public interface AppConstants {
     String API_KEY_YOUTUBE = "AIzaSyAWoyaRh13Z1KEN23tedjCY-4ywXkCTaQ0";
 
     // Miscellaneous
+    String CONTENT_TYPE_JSON = "Content-Type: application/json";
     String YOUTUBE_THUMBNAIL_IMAGE_NAME = "/0.jpg";
 }
