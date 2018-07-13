@@ -25,26 +25,27 @@ public interface AppConstants {
     String BUILD_TYPE_DEBUG = "debug";
 
     // URLs - Root, API
-    String ROOT_URL_API = "http://shreegurudham.com/apis/Default.aspx/";
+    String ROOT_URL_API = "http://www.shreegurudham.com/apis/ApiService.svc/";
     String ROOT_URL_YOUTUBE = "https://www.youtube.com/watch?v=";
     String ROOT_URL_YOUTUBE_THUMBNAIL = "https://img.youtube.com/vi/";
-    String API_GETPAGECONTENT = "getPageContent";
 
     // Web-Service Keys
     String KEY_STATUS_SML = "status";
     String KEY_SHOW_MSG_SML = "show_msg";
     String KEY_MESSAGE_SML = "message";
     String KEY_DATA_SML = "data";
-    String KEY_LANGUAGE_CODE_SML = "language_code";
-    String KEY_PAGE_KEY_SML = "page_key";
     String KEY_PAGE_TITLE_CAPS = "PAGETITLE";
     String KEY_MATTER_DESC_CAPS = "MATTERDESC";
 
-    // Web-Service Keys
+    // Web-Service Values
+    String VALUE_ABOUT_DEKAWADA = "about_dekawada";
+    String VALUE_ABOUT_SHREEGURUJI = "about_shreeguruji";
+    String VALUE_ABOUT_SHREEBAPU = "about_shreebapu";
     String VALUE_ABOUT_SHIVPOOJA = "about_shivpooja";
 
     // User session manager Keys
     String KEY_SELECTED_LANGUAGE = "selectedLanguage";
+    String KEY_LANGUAGE_CHANGED = "isLanguageChanged";
 
     // Language short code
     String LANGUAGE_SHORT_ENGLISH = "en";
@@ -53,6 +54,8 @@ public interface AppConstants {
     // PutExtra Keys
     String PUT_EXTRA_COME_FROM = "comeFrom";
     String PUT_EXTRA_NVGTNVW_POSTN = "nvgtnvwPosition";
+    String PUT_EXTRA_PAGE_KEY = "page_key";
+    String PUT_EXTRA_POSITION = "position";
     String PUT_EXTRA_ALBUM_NAME = "albumName";
     String PUT_EXTRA_IMAGE_URL = "imageUrl";
     String PUT_EXTRA_YOUTUBE_VIDEOID = "youtubeVideoID";

@@ -36,6 +36,7 @@ import android.view.View;
 
 import com.jalotsav.shreegurudham.common.AppConstants;
 import com.jalotsav.shreegurudham.common.UserSessionManager;
+import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntAboutUs;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntAlbumsImages;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntHome;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntInDevelopment;
@@ -174,7 +175,7 @@ public class ActvtyMain extends AppCompatActivity implements AppConstants,
                 return true;
             case R.id.action_nvgtndrwr_main_aboutus:
 
-                fragment = new FrgmntInDevelopment();
+                fragment = new FrgmntAboutUs();
                 mToolbar.setTitle(getString(R.string.aboutus_sml));
                 loadFragment(fragment, item);
                 return true;
@@ -281,21 +282,21 @@ public class ActvtyMain extends AppCompatActivity implements AppConstants,
             case R.id.action_languages_item_english:
 
                 session.setSelectedLanguage(LANGUAGE_SHORT_ENGLISH);
-                setLanguageToAppLocale(session.getSelectedLanguage());
+                setLanguageToAppLocale();
                 return true;
             case R.id.action_languages_item_gujarati:
 
                 session.setSelectedLanguage(LANGUAGE_SHORT_GUJARATI);
-                setLanguageToAppLocale(session.getSelectedLanguage());
+                setLanguageToAppLocale();
                 return true;
         }
         return false;
     }
 
     // Set selected language to application LOCALE
-    private void setLanguageToAppLocale(String currentLanguage) {
+    public void setLanguageToAppLocale() {
 
-        Locale locale = new Locale(currentLanguage.toLowerCase());
+        Locale locale = new Locale(session.getSelectedLanguage().toLowerCase());
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;

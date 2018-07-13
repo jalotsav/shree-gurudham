@@ -43,6 +43,12 @@
     <string name="home_title_msg">Shri Shiv Shakti Guru-Goudham Anand Ashram Dakawada</string>
     <string name="home_descrptn_msg">Jagatjan multi-disciple is situated in the Chauvala diocese where Pradyvabavarva is situated in the district of Devtraj in Gurdum Dikawada, Ahmedabad district.</string>
 
+    <!--About Us-->
+    <string name="aboutus_title_1">Anand Ashram</string>
+    <string name="aboutus_title_2">Shree Purushottamlalji Maharaj</string>
+    <string name="aboutus_title_3">Shree Kalidasji Maharaj</string>
+    <string name="aboutus_title_4">Shree Shiv Partheshwar Mahapoojan</string>
+
     <!--Images-->
     <string name="images_appear_here">Images appear here</string>
 

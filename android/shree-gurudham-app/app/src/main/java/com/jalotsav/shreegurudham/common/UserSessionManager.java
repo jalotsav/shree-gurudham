@@ -12,10 +12,6 @@ public class UserSessionManager implements AppConstants {
     private SharedPreferences.Editor editor;
     private Context mContext;
 
-    // All Shared Preferences Keys
-    // Is User SignIn or not
-    private static final String IS_USER_LOGIN = "isUserLoggedIn";
-
     // Constructor
     public UserSessionManager(Context context) {
 
@@ -36,6 +32,18 @@ public class UserSessionManager implements AppConstants {
     public void setSelectedLanguage(String selectedLanguage) {
 
         editor.putString(KEY_SELECTED_LANGUAGE, selectedLanguage);
+        editor.commit();
+    }
+
+    // Get-Set Language Changed to SharedPreferences
+    public boolean isLanguageChanged() {
+
+        return pref.getBoolean(KEY_LANGUAGE_CHANGED, false);
+    }
+
+    public void setLanguageChanged(boolean isLanguageChanged) {
+
+        editor.putBoolean(KEY_LANGUAGE_CHANGED, isLanguageChanged);
         editor.commit();
     }
 }

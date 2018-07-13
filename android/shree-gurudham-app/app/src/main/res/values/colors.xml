@@ -65,6 +65,7 @@
     <color name="blackTrsprnt20">#20FFFFFF</color>
     <color name="blackTrsprnt50">#50000000</color>
     <color name="blackTrsprnt80">#80000000</color>
+    <color name="blackTrsprnt60">#60000000</color>
     <color name="turquoiseDrk">#4DB6AC</color>
     <color name="gray">#DDDDDD</color>
     <color name="gray5B">#5B5B5B</color>
@@ -98,7 +99,7 @@
     <color name="yellowSnackbar">#F4B400</color>
 
     <!--Use in App-->
-    <color name="window_bg">#607D8B</color>
+    <color name="window_bg">#F8EBBE</color>
     <color name="content_bg">#F2D799</color>
     <color name="grdntstart_red">#FE5393</color>
     <color name="grdntend_red">#FA6773</color>
