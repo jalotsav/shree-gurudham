@@ -38,6 +38,7 @@ import com.jalotsav.shreegurudham.common.AppConstants;
 import com.jalotsav.shreegurudham.common.UserSessionManager;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntAboutUs;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntAlbumsImages;
+import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntAudios;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntHome;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntInDevelopment;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntVideos;
@@ -193,7 +194,7 @@ public class ActvtyMain extends AppCompatActivity implements AppConstants,
                 return true;
             case R.id.action_nvgtndrwr_main_audios:
 
-                fragment = new FrgmntInDevelopment();
+                fragment = new FrgmntAudios();
                 mToolbar.setTitle(getString(R.string.audios_sml));
                 loadFragment(fragment, item);
                 return true;

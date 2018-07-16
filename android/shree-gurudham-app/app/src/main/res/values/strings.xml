@@ -54,4 +54,7 @@
 
     <!--Videos-->
     <string name="videos_appear_here">Videos appear here</string>
+
+    <!--Audios-->
+    <string name="audios_appear_here">Audios appear here</string>
 </resources>

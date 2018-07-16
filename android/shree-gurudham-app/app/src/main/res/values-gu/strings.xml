@@ -51,4 +51,7 @@
 
     <!--Videos-->
     <string name="videos_appear_here">વિડિઓઝ અહીં દેખાશે</string>
+
+    <!--Audios-->
+    <string name="audios_appear_here">ઑડિઓઝ અહીં દેખાશે</string>
 </resources>
