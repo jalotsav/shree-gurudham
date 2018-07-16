@@ -67,11 +67,11 @@ public class RcyclrVideosAdapter extends RecyclerView.Adapter<RcyclrVideosAdapte
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         final MdlVideosListResData objMdlVideos = mArrylstVideos.get(position);
-        holder.mTvTitle.setText(objMdlVideos.getTitle());
-        if(!TextUtils.isEmpty(objMdlVideos.getYoutubeVideoID())) {
+        holder.mTvTitle.setText(objMdlVideos.getVideoTitle());
+        if(!TextUtils.isEmpty(objMdlVideos.getYoutubeID())) {
             Glide.with(mContext)
                     .load(AppConstants.ROOT_URL_YOUTUBE_THUMBNAIL
-                            .concat(objMdlVideos.getYoutubeVideoID())
+                            .concat(objMdlVideos.getYoutubeID())
                             .concat(AppConstants.YOUTUBE_THUMBNAIL_IMAGE_NAME))
                     .apply(new RequestOptions().placeholder(mDrwblDefault))
                     .into(holder.mImgvwImage);
@@ -81,7 +81,7 @@ public class RcyclrVideosAdapter extends RecyclerView.Adapter<RcyclrVideosAdapte
             public void onClick(View view) {
 
                 mContext.startActivity(new Intent(mContext, ActvtyPreviewVideo.class)
-                        .putExtra(AppConstants.PUT_EXTRA_YOUTUBE_VIDEOID, objMdlVideos.getYoutubeVideoID()));
+                        .putExtra(AppConstants.PUT_EXTRA_YOUTUBE_VIDEOID, objMdlVideos.getYoutubeID()));
             }
         });
     }

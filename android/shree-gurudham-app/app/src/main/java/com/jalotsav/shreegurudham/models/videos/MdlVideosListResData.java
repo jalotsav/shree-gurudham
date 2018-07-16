@@ -1,31 +1,41 @@
 package com.jalotsav.shreegurudham.models.videos;
 
+import com.google.gson.annotations.SerializedName;
+import com.jalotsav.shreegurudham.common.AppConstants;
+
 /**
  * Created by Jalotsav on 7/12/2018.
  */
-public class MdlVideosListResData {
+public class MdlVideosListResData implements AppConstants {
 
-    private String title;
-    private String youtubeVideoID;
+    @SerializedName(KEY_VIDEO_TITLE_CAPS)
+    private String videoTitle;
+    @SerializedName(KEY_VIDEO_PATH_CAPS)
+    private String videoPath;
+    @SerializedName(KEY_YOUTUBE_ID_CAPS)
+    private String youtubeID;
 
-    public MdlVideosListResData(String title, String youtubeVideoID) {
-        this.title = title;
-        this.youtubeVideoID = youtubeVideoID;
+    public String getVideoTitle() {
+        return videoTitle;
     }
 
-    public String getTitle() {
-        return title;
+    public void setVideoTitle(String videoTitle) {
+        this.videoTitle = videoTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getVideoPath() {
+        return videoPath;
     }
 
-    public String getYoutubeVideoID() {
-        return youtubeVideoID;
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
     }
 
-    public void setYoutubeVideoID(String youtubeVideoID) {
-        this.youtubeVideoID = youtubeVideoID;
+    public String getYoutubeID() {
+        return youtubeID;
+    }
+
+    public void setYoutubeID(String youtubeID) {
+        this.youtubeID = youtubeID;
     }
 }

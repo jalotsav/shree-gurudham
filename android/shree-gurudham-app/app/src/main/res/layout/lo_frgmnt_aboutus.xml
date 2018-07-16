@@ -45,7 +45,7 @@
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/imgcd_image"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/img_home_slider_default" />
+                    app:srcCompat="@drawable/img_about_dekawada" />
 
                 <View
                     android:layout_width="match_parent"
@@ -87,7 +87,7 @@
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/imgcd_image"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/img_home_slider_default" />
+                    app:srcCompat="@drawable/img_about_shreeguruji" />
 
                 <View
                     android:layout_width="match_parent"
@@ -129,7 +129,7 @@
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/imgcd_image"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/img_home_slider_default" />
+                    app:srcCompat="@drawable/img_about_shreebapu" />
 
                 <View
                     android:layout_width="match_parent"
@@ -171,7 +171,7 @@
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/imgcd_image"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/img_home_slider_default" />
+                    app:srcCompat="@drawable/img_about_shivpooja" />
 
                 <View
                     android:layout_width="match_parent"

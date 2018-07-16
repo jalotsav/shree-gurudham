@@ -33,5 +33,37 @@ public class MdlImagesListRes implements AppConstants {
     @SerializedName(KEY_MESSAGE_SML)
     private String message;
     @SerializedName(KEY_DATA_SML)
-    private ArrayList<MdlImagesListResData> arrylstMdlImagesListResData;
+    private ArrayList<MdlImagesListResData> arrylstMdlImagesListData;
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public boolean isShowMsg() {
+        return showMsg;
+    }
+
+    public void setShowMsg(boolean showMsg) {
+        this.showMsg = showMsg;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public ArrayList<MdlImagesListResData> getArrylstMdlImagesListData() {
+        return arrylstMdlImagesListData;
+    }
+
+    public void setArrylstMdlImagesListData(ArrayList<MdlImagesListResData> arrylstMdlImagesListData) {
+        this.arrylstMdlImagesListData = arrylstMdlImagesListData;
+    }
 }

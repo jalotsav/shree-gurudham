@@ -28,6 +28,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,11 @@ import com.jalotsav.shreegurudham.R;
 import com.jalotsav.shreegurudham.adapter.RcyclrVideosAdapter;
 import com.jalotsav.shreegurudham.common.GeneralFunctions;
 import com.jalotsav.shreegurudham.common.RecyclerViewEmptySupport;
+import com.jalotsav.shreegurudham.common.UserSessionManager;
+import com.jalotsav.shreegurudham.models.videos.MdlVideosListRes;
 import com.jalotsav.shreegurudham.models.videos.MdlVideosListResData;
+import com.jalotsav.shreegurudham.retrofitapi.APIGetVideos;
+import com.jalotsav.shreegurudham.retrofitapi.APIRetroBuilder;
 
 import java.util.ArrayList;
 
@@ -46,11 +51,16 @@ import butterknife.BindDrawable;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Jalotsav on 7/12/2018.
  */
 public class FrgmntVideos extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+
+    private static final String TAG = "FrgmntVideos";
 
     @BindView(R.id.cordntrlyot_frgmnt_videos_list) CoordinatorLayout mCrdntrlyot;
     @BindView(R.id.swiperfrshlyot_frgmnt_videos_list) SwipeRefreshLayout mSwiperfrshlyot;
@@ -60,9 +70,12 @@ public class FrgmntVideos extends Fragment implements SwipeRefreshLayout.OnRefre
 
     @BindString(R.string.videos_appear_here) String mVideosAppearHere;
     @BindString(R.string.no_intrnt_cnctn) String mNoInternetConnMsg;
+    @BindString(R.string.server_problem_sml) String mServerPrblmMsg;
+    @BindString(R.string.internal_problem_sml) String mInternalPrblmMsg;
 
     @BindDrawable(R.drawable.img_home_slider_default) Drawable mDrwblDefault;
 
+    UserSessionManager session;
     RecyclerView.LayoutManager mLayoutManager;
     RcyclrVideosAdapter mAdapter;
     ArrayList<MdlVideosListResData> mArrylstMdlVideos;
@@ -75,6 +88,8 @@ public class FrgmntVideos extends Fragment implements SwipeRefreshLayout.OnRefre
         ButterKnife.bind(this, rootView);
 
         setHasOptionsMenu(true);
+
+        session = new UserSessionManager(getActivity());
 
         initSwipeRefreshLayout();
 
@@ -126,19 +141,49 @@ public class FrgmntVideos extends Fragment implements SwipeRefreshLayout.OnRefre
     // call API for Get Videos List
     private void fetchVideosData() {
 
-        new Handler().postDelayed(new Runnable() {
+        APIGetVideos apiGetVideos = APIRetroBuilder.getRetroBuilder(true).create(APIGetVideos.class);
+        Call<MdlVideosListRes> callMdlAlbumsImages = apiGetVideos.callGetVideos(session.getSelectedLanguage());
+        callMdlAlbumsImages.enqueue(new Callback<MdlVideosListRes>() {
             @Override
-            public void run() {
+            public void onResponse(Call<MdlVideosListRes> call, Response<MdlVideosListRes> response) {
 
                 mSwiperfrshlyot.setRefreshing(false);
 
-                mArrylstMdlVideos = new ArrayList<>();
-                mArrylstMdlVideos.add(new MdlVideosListResData("Shree Purushottamlalji Maharaj", "jMLoiSeJzcI"));
-                mArrylstMdlVideos.add(new MdlVideosListResData("Rajkot Katha Day -1 Kalidasji Bapu", "luzfr0kThas"));
+                if(response.isSuccessful()) {
 
-                mAdapter = new RcyclrVideosAdapter(getActivity(), mArrylstMdlVideos, mDrwblDefault);
-                mRecyclerView.setAdapter(mAdapter);
+                    try {
+                        if(response.body().isStatus()) {
+
+                            if(response.body().isShowMsg())
+                                Snackbar.make(mCrdntrlyot, response.body().getMessage(), Snackbar.LENGTH_LONG).show();
+                            else {
+
+                                if(isAdded()) { // to check fragment is attached
+
+                                    mArrylstMdlVideos = new ArrayList<>();
+                                    mArrylstMdlVideos.addAll(response.body().getArrylstMdlVideosListData());
+                                    mAdapter = new RcyclrVideosAdapter(getActivity(), mArrylstMdlVideos, mDrwblDefault);
+                                    mRecyclerView.setAdapter(mAdapter);
+                                }
+                            }
+                        } else
+                            Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_LONG).show();
+                    } catch (Exception e) {
+
+                        e.printStackTrace();
+                        Log.e(TAG, "fetchVideosData() - onResponse: " + e.getMessage());
+                        Snackbar.make(mCrdntrlyot, mInternalPrblmMsg, Snackbar.LENGTH_LONG).show();
+                    }
+                } else
+                    Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_SHORT).show();
             }
-        }, 3000);
+
+            @Override
+            public void onFailure(Call<MdlVideosListRes> call, Throwable t) {
+
+                mSwiperfrshlyot.setRefreshing(false);
+                Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_SHORT).show();
+            }
+        });
     }
 }

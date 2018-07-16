@@ -16,32 +16,42 @@
 
 package com.jalotsav.shreegurudham.models.images;
 
+import com.google.gson.annotations.SerializedName;
+import com.jalotsav.shreegurudham.common.AppConstants;
+
 /**
  * Created by Jalotsav on 7/10/2018.
  */
-public class MdlAlbumsImagesResData {
+public class MdlAlbumsImagesResData implements AppConstants {
 
-    private String name;
-    private String coverImageURL;
+    @SerializedName(KEY_ALBUM_ID_CAPS)
+    private int albumID;
+    @SerializedName(KEY_ALBUM_TITLE_CAPS)
+    private String albumTitle;
+    @SerializedName(KEY_IMG_PATH_CAPS)
+    private String imgPath;
 
-    public MdlAlbumsImagesResData(String name, String coverImageURL) {
-        this.name = name;
-        this.coverImageURL = coverImageURL;
+    public int getAlbumID() {
+        return albumID;
     }
 
-    public String getName() {
-        return name;
+    public void setAlbumID(int albumID) {
+        this.albumID = albumID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getAlbumTitle() {
+        return albumTitle;
     }
 
-    public String getCoverImageURL() {
-        return coverImageURL;
+    public void setAlbumTitle(String albumTitle) {
+        this.albumTitle = albumTitle;
     }
 
-    public void setCoverImageURL(String coverImageURL) {
-        this.coverImageURL = coverImageURL;
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 }

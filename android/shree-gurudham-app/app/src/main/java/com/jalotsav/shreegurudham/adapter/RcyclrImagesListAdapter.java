@@ -65,7 +65,7 @@ public class RcyclrImagesListAdapter extends RecyclerView.Adapter<RcyclrImagesLi
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
-        final String imageURL = mArrylstImages.get(position).getImageURL();
+        final String imageURL = mArrylstImages.get(position).getImagePath();
         if(!TextUtils.isEmpty(imageURL)) {
             Glide.with(mContext)
                     .load(imageURL)

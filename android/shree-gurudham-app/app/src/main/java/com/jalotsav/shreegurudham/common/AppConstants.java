@@ -36,6 +36,14 @@ public interface AppConstants {
     String KEY_DATA_SML = "data";
     String KEY_PAGE_TITLE_CAPS = "PAGETITLE";
     String KEY_MATTER_DESC_CAPS = "MATTERDESC";
+    String KEY_ALBUM_ID_CAPS = "ALBUMID";
+    String KEY_ALBUM_TITLE_CAPS = "ALBUMTITLE";
+    String KEY_IMG_PATH_CAPS = "IMGPATH";
+    String KEY_IMAGE_TITLE_CAPS = "IMAGETITLE";
+    String KEY_IMAGE_PATH_CAPS = "IMAGEPATH";
+    String KEY_VIDEO_PATH_CAPS = "VIDEOPATH";
+    String KEY_VIDEO_TITLE_CAPS = "VIDEOTITLE";
+    String KEY_YOUTUBE_ID_CAPS = "YOUTUBEID";
 
     // Web-Service Values
     String VALUE_ABOUT_DEKAWADA = "about_dekawada";
@@ -56,6 +64,7 @@ public interface AppConstants {
     String PUT_EXTRA_NVGTNVW_POSTN = "nvgtnvwPosition";
     String PUT_EXTRA_PAGE_KEY = "page_key";
     String PUT_EXTRA_POSITION = "position";
+    String PUT_EXTRA_ALBUM_ID = "albumID";
     String PUT_EXTRA_ALBUM_NAME = "albumName";
     String PUT_EXTRA_IMAGE_URL = "imageUrl";
     String PUT_EXTRA_YOUTUBE_VIDEOID = "youtubeVideoID";

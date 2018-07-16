@@ -18,7 +18,6 @@ package com.jalotsav.shreegurudham.nvgtnvwmain;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -28,6 +27,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +38,11 @@ import com.jalotsav.shreegurudham.R;
 import com.jalotsav.shreegurudham.adapter.RcyclrAlbumsImagesAdapter;
 import com.jalotsav.shreegurudham.common.GeneralFunctions;
 import com.jalotsav.shreegurudham.common.RecyclerViewEmptySupport;
+import com.jalotsav.shreegurudham.common.UserSessionManager;
+import com.jalotsav.shreegurudham.models.images.MdlAlbumsImagesRes;
 import com.jalotsav.shreegurudham.models.images.MdlAlbumsImagesResData;
+import com.jalotsav.shreegurudham.retrofitapi.APIGetAlbum;
+import com.jalotsav.shreegurudham.retrofitapi.APIRetroBuilder;
 
 import java.util.ArrayList;
 
@@ -46,11 +50,16 @@ import butterknife.BindDrawable;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Jalotsav on 7/10/2018.
  */
 public class FrgmntAlbumsImages extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+
+    private static final String TAG = "FrgmntAlbumsImages";
 
     @BindView(R.id.cordntrlyot_frgmnt_albums_images) CoordinatorLayout mCrdntrlyot;
     @BindView(R.id.swiperfrshlyot_frgmnt_albums_images) SwipeRefreshLayout mSwiperfrshlyot;
@@ -60,9 +69,12 @@ public class FrgmntAlbumsImages extends Fragment implements SwipeRefreshLayout.O
 
     @BindString(R.string.images_appear_here) String mImagesAppearHere;
     @BindString(R.string.no_intrnt_cnctn) String mNoInternetConnMsg;
+    @BindString(R.string.server_problem_sml) String mServerPrblmMsg;
+    @BindString(R.string.internal_problem_sml) String mInternalPrblmMsg;
 
     @BindDrawable(R.drawable.img_home_slider_default) Drawable mDrwblDefault;
 
+    UserSessionManager session;
     RecyclerView.LayoutManager mLayoutManager;
     RcyclrAlbumsImagesAdapter mAdapter;
     ArrayList<MdlAlbumsImagesResData> mArrylstMdlAlbumsImages;
@@ -75,6 +87,8 @@ public class FrgmntAlbumsImages extends Fragment implements SwipeRefreshLayout.O
         ButterKnife.bind(this, rootView);
 
         setHasOptionsMenu(true);
+
+        session = new UserSessionManager(getActivity());
 
         initSwipeRefreshLayout();
 
@@ -116,29 +130,59 @@ public class FrgmntAlbumsImages extends Fragment implements SwipeRefreshLayout.O
     public void onRefresh() {
 
         if(GeneralFunctions.isNetConnected(getActivity()))
-            fetchImagesData();
+            fetchImageAlbums();
         else {
             mSwiperfrshlyot.setRefreshing(false);
             Snackbar.make(mCrdntrlyot, mNoInternetConnMsg, Snackbar.LENGTH_LONG).show();
         }
     }
 
-    // call API for Get Images List
-    private void fetchImagesData() {
+    // Call Retrofit API
+    private void fetchImageAlbums() {
 
-        new Handler().postDelayed(new Runnable() {
+        APIGetAlbum apiGetAlbum = APIRetroBuilder.getRetroBuilder(true).create(APIGetAlbum.class);
+        Call<MdlAlbumsImagesRes> callMdlAlbumsImages = apiGetAlbum.callGetAlbum(session.getSelectedLanguage());
+        callMdlAlbumsImages.enqueue(new Callback<MdlAlbumsImagesRes>() {
             @Override
-            public void run() {
+            public void onResponse(Call<MdlAlbumsImagesRes> call, Response<MdlAlbumsImagesRes> response) {
 
                 mSwiperfrshlyot.setRefreshing(false);
 
-                mArrylstMdlAlbumsImages = new ArrayList<>();
-                mArrylstMdlAlbumsImages.add(new MdlAlbumsImagesResData(getString(R.string.app_name), "https://img.youtube.com/vi/J4c92aL6VlQ/0.jpg"));
-                mArrylstMdlAlbumsImages.add(new MdlAlbumsImagesResData(getString(R.string.app_name), "https://img.youtube.com/vi/8G0FH3SCg4g/0.jpg"));
+                if(response.isSuccessful()) {
 
-                mAdapter = new RcyclrAlbumsImagesAdapter(getActivity(), mArrylstMdlAlbumsImages, mDrwblDefault);
-                mRecyclerView.setAdapter(mAdapter);
+                    try {
+                        if(response.body().isStatus()) {
+
+                            if(response.body().isShowMsg())
+                                Snackbar.make(mCrdntrlyot, response.body().getMessage(), Snackbar.LENGTH_LONG).show();
+                            else {
+
+                                if(isAdded()) { // to check fragment is attached
+
+                                    mArrylstMdlAlbumsImages = new ArrayList<>();
+                                    mArrylstMdlAlbumsImages.addAll(response.body().getArrylstMdlAlbumsImagesData());
+                                    mAdapter = new RcyclrAlbumsImagesAdapter(getActivity(), mArrylstMdlAlbumsImages, mDrwblDefault);
+                                    mRecyclerView.setAdapter(mAdapter);
+                                }
+                            }
+                        } else
+                            Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_LONG).show();
+                    } catch (Exception e) {
+
+                        e.printStackTrace();
+                        Log.e(TAG, "fetchImageAlbums() - onResponse: " + e.getMessage());
+                        Snackbar.make(mCrdntrlyot, mInternalPrblmMsg, Snackbar.LENGTH_LONG).show();
+                    }
+                } else
+                    Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_SHORT).show();
             }
-        }, 3000);
+
+            @Override
+            public void onFailure(Call<MdlAlbumsImagesRes> call, Throwable t) {
+
+                mSwiperfrshlyot.setRefreshing(false);
+                Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_SHORT).show();
+            }
+        });
     }
 }

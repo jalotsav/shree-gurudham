@@ -16,22 +16,32 @@
 
 package com.jalotsav.shreegurudham.models.images;
 
+import com.google.gson.annotations.SerializedName;
+import com.jalotsav.shreegurudham.common.AppConstants;
+
 /**
  * Created by Jalotsav on 7/11/2018.
  */
-public class MdlImagesListResData {
+public class MdlImagesListResData implements AppConstants {
 
-    private String imageURL;
+    @SerializedName(KEY_IMAGE_TITLE_CAPS)
+    private String imageTitle;
+    @SerializedName(KEY_IMAGE_PATH_CAPS)
+    private String imagePath;
 
-    public MdlImagesListResData(String imageURL) {
-        this.imageURL = imageURL;
+    public String getImageTitle() {
+        return imageTitle;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public void setImageTitle(String imageTitle) {
+        this.imageTitle = imageTitle;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

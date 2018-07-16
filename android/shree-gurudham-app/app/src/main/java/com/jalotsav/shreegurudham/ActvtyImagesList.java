@@ -27,6 +27,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,7 +36,11 @@ import com.jalotsav.shreegurudham.adapter.RcyclrImagesListAdapter;
 import com.jalotsav.shreegurudham.common.AppConstants;
 import com.jalotsav.shreegurudham.common.GeneralFunctions;
 import com.jalotsav.shreegurudham.common.RecyclerViewEmptySupport;
+import com.jalotsav.shreegurudham.common.UserSessionManager;
+import com.jalotsav.shreegurudham.models.images.MdlImagesListRes;
 import com.jalotsav.shreegurudham.models.images.MdlImagesListResData;
+import com.jalotsav.shreegurudham.retrofitapi.APIGetImage;
+import com.jalotsav.shreegurudham.retrofitapi.APIRetroBuilder;
 
 import java.util.ArrayList;
 
@@ -43,11 +48,16 @@ import butterknife.BindDrawable;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Jalotsav on 7/11/2018.
  */
 public class ActvtyImagesList extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+
+    private static final String TAG = ActvtyImagesList.class.getSimpleName();
 
     @BindView(R.id.cordntrlyot_actvty_images_list) CoordinatorLayout mCrdntrlyot;
     @BindView(R.id.swiperfrshlyot_actvty_images_list) SwipeRefreshLayout mSwiperfrshlyot;
@@ -57,13 +67,17 @@ public class ActvtyImagesList extends AppCompatActivity implements SwipeRefreshL
 
     @BindString(R.string.images_appear_here) String mImagesAppearHere;
     @BindString(R.string.no_intrnt_cnctn) String mNoInternetConnMsg;
+    @BindString(R.string.server_problem_sml) String mServerPrblmMsg;
+    @BindString(R.string.internal_problem_sml) String mInternalPrblmMsg;
 
     @BindDrawable(R.drawable.img_home_slider_default) Drawable mDrwblDefault;
 
+    UserSessionManager session;
     RecyclerView.LayoutManager mLayoutManager;
     RcyclrImagesListAdapter mAdapter;
     ArrayList<MdlImagesListResData> mArrylstMdlImages;
 
+    int mAlbumID;
     String mAlbumName;
 
     @Override
@@ -72,6 +86,7 @@ public class ActvtyImagesList extends AppCompatActivity implements SwipeRefreshL
         setContentView(R.layout.lo_actvty_images_list);
         ButterKnife.bind(this);
 
+        mAlbumID = getIntent().getIntExtra(AppConstants.PUT_EXTRA_ALBUM_ID, 0);
         mAlbumName = getIntent().getStringExtra(AppConstants.PUT_EXTRA_ALBUM_NAME);
         try {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -79,6 +94,8 @@ public class ActvtyImagesList extends AppCompatActivity implements SwipeRefreshL
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        session = new UserSessionManager(this);
 
         initSwipeRefreshLayout();
 
@@ -128,21 +145,47 @@ public class ActvtyImagesList extends AppCompatActivity implements SwipeRefreshL
     // call API for Get Images List of selected Album
     private void fetchImagesData() {
 
-        new Handler().postDelayed(new Runnable() {
+        APIGetImage apiGetImage = APIRetroBuilder.getRetroBuilder(true).create(APIGetImage.class);
+        Call<MdlImagesListRes> callMdlPageContent = apiGetImage.callGetImage(session.getSelectedLanguage(), mAlbumID);
+        callMdlPageContent.enqueue(new Callback<MdlImagesListRes>() {
             @Override
-            public void run() {
+            public void onResponse(Call<MdlImagesListRes> call, Response<MdlImagesListRes> response) {
 
                 mSwiperfrshlyot.setRefreshing(false);
 
-                mArrylstMdlImages = new ArrayList<>();
-                mArrylstMdlImages.add(new MdlImagesListResData("https://img.youtube.com/vi/J4c92aL6VlQ/0.jpg"));
-                mArrylstMdlImages.add(new MdlImagesListResData("https://img.youtube.com/vi/8G0FH3SCg4g/0.jpg"));
-                mArrylstMdlImages.add(new MdlImagesListResData("https://img.youtube.com/vi/jMLoiSeJzcI/0.jpg"));
+                if(response.isSuccessful()) {
 
-                mAdapter = new RcyclrImagesListAdapter(ActvtyImagesList.this, mArrylstMdlImages, mDrwblDefault);
-                mRecyclerView.setAdapter(mAdapter);
+                    try {
+                        if(response.body().isStatus()) {
+
+                            if(response.body().isShowMsg())
+                                Snackbar.make(mCrdntrlyot, response.body().getMessage(), Snackbar.LENGTH_LONG).show();
+                            else {
+
+                                mArrylstMdlImages = new ArrayList<>();
+                                mArrylstMdlImages.addAll(response.body().getArrylstMdlImagesListData());
+                                mAdapter = new RcyclrImagesListAdapter(ActvtyImagesList.this, mArrylstMdlImages, mDrwblDefault);
+                                mRecyclerView.setAdapter(mAdapter);
+                            }
+                        } else
+                            Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_LONG).show();
+                    } catch (Exception e) {
+
+                        e.printStackTrace();
+                        Log.e(TAG, "fetchImagesData() - onResponse: " + e.getMessage());
+                        Snackbar.make(mCrdntrlyot, mInternalPrblmMsg, Snackbar.LENGTH_LONG).show();
+                    }
+                } else
+                    Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_SHORT).show();
             }
-        }, 3000);
+
+            @Override
+            public void onFailure(Call<MdlImagesListRes> call, Throwable t) {
+
+                mSwiperfrshlyot.setRefreshing(false);
+                Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

@@ -67,8 +67,8 @@ public class RcyclrAlbumsImagesAdapter extends RecyclerView.Adapter<RcyclrAlbums
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         final MdlAlbumsImagesResData objMdlAlbumsImages = mArrylstAlbumsImages.get(position);
-        holder.mTvName.setText(objMdlAlbumsImages.getName());
-        String imageURL = objMdlAlbumsImages.getCoverImageURL();
+        holder.mTvName.setText(objMdlAlbumsImages.getAlbumTitle());
+        String imageURL = objMdlAlbumsImages.getImgPath();
         if(!TextUtils.isEmpty(imageURL)) {
             Glide.with(mContext)
                     .load(imageURL)
@@ -81,7 +81,8 @@ public class RcyclrAlbumsImagesAdapter extends RecyclerView.Adapter<RcyclrAlbums
             public void onClick(View view) {
 
                 mContext.startActivity(new Intent(mContext, ActvtyImagesList.class)
-                        .putExtra(AppConstants.PUT_EXTRA_ALBUM_NAME, objMdlAlbumsImages.getName()));
+                        .putExtra(AppConstants.PUT_EXTRA_ALBUM_ID, objMdlAlbumsImages.getAlbumID())
+                        .putExtra(AppConstants.PUT_EXTRA_ALBUM_NAME, objMdlAlbumsImages.getAlbumTitle()));
             }
         });
     }

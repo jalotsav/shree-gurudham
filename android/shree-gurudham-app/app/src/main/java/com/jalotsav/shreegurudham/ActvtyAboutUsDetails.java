@@ -37,7 +37,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jalotsav.shreegurudham.common.AppConstants;
 import com.jalotsav.shreegurudham.common.GeneralFunctions;
@@ -103,7 +102,7 @@ public class ActvtyAboutUsDetails extends AppCompatActivity implements AppConsta
         setHeaderDetailsUI();
 
         if (GeneralFunctions.isNetConnected(this))
-            getAboutUsDetails();
+            fetchAboutUsDetails();
         else Snackbar.make(mCrdntrlyot, mNoInternetConnMsg, Snackbar.LENGTH_LONG).show();
     }
 
@@ -143,25 +142,25 @@ public class ActvtyAboutUsDetails extends AppCompatActivity implements AppConsta
         switch (mSelectedPosition) {
             case 0:
 
-                mImgvwHeaderImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_slider_default));
+                mImgvwHeaderImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_about_dekawada));
                 mTvHeaderTitle.setText(getString(R.string.aboutus_title_1));
                 mTvContent.setText(getString(R.string.aboutus_title_1));
                 break;
             case 1:
 
-                mImgvwHeaderImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_slider_default));
+                mImgvwHeaderImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_about_shreeguruji));
                 mTvHeaderTitle.setText(getString(R.string.aboutus_title_2));
                 mTvContent.setText(getString(R.string.aboutus_title_2));
                 break;
             case 2:
 
-                mImgvwHeaderImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_slider_default));
+                mImgvwHeaderImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_about_shreebapu));
                 mTvHeaderTitle.setText(getString(R.string.aboutus_title_3));
                 mTvContent.setText(getString(R.string.aboutus_title_3));
                 break;
             case 3:
 
-                mImgvwHeaderImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_slider_default));
+                mImgvwHeaderImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_about_shivpooja));
                 mTvHeaderTitle.setText(getString(R.string.aboutus_title_4));
                 mTvContent.setText(getString(R.string.aboutus_title_4));
                 break;
@@ -169,7 +168,7 @@ public class ActvtyAboutUsDetails extends AppCompatActivity implements AppConsta
     }
 
     // Call Retrofit API
-    private void getAboutUsDetails() {
+    private void fetchAboutUsDetails() {
 
         mPrgrsbrMain.setVisibility(View.VISIBLE);
         APIPageContent apiPageContent = APIRetroBuilder.getRetroBuilder(false).create(APIPageContent.class);
@@ -189,15 +188,15 @@ public class ActvtyAboutUsDetails extends AppCompatActivity implements AppConsta
                                 Snackbar.make(mCrdntrlyot, response.body().getMessage(), Snackbar.LENGTH_LONG).show();
                             else {
 
-                                ArrayList<MdlPageContentGetResData> arrylstMdlBranchListData = response.body().getArrylstMdlPageCntntGetData();
-                                mTvContent.setText(arrylstMdlBranchListData.get(0).getMetterDescription());
+                                ArrayList<MdlPageContentGetResData> arrylstMdlPageCntntData = response.body().getArrylstMdlPageCntntGetData();
+                                mTvContent.setText(arrylstMdlPageCntntData.get(0).getMetterDescription());
                             }
                         } else
                             Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_LONG).show();
                     } catch (Exception e) {
 
                         e.printStackTrace();
-                        Log.e(TAG, "getAboutUsDetails() - onResponse: " + e.getMessage());
+                        Log.e(TAG, "fetchAboutUsDetails() - onResponse: " + e.getMessage());
                         Snackbar.make(mCrdntrlyot, mInternalPrblmMsg, Snackbar.LENGTH_LONG).show();
                     }
                 } else
@@ -211,7 +210,6 @@ public class ActvtyAboutUsDetails extends AppCompatActivity implements AppConsta
                 Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_SHORT).show();
             }
         });
-
     }
 
     // Create LANGUAGES popup menu
