@@ -17,7 +17,6 @@
 package com.jalotsav.shreegurudham.nvgtnvwmain;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -25,10 +24,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,13 +38,19 @@ import com.jalotsav.shreegurudham.adapter.RcyclrAudiosAdapter;
 import com.jalotsav.shreegurudham.common.GeneralFunctions;
 import com.jalotsav.shreegurudham.common.RecyclerViewEmptySupport;
 import com.jalotsav.shreegurudham.common.UserSessionManager;
+import com.jalotsav.shreegurudham.models.audios.MdlAudiosListRes;
 import com.jalotsav.shreegurudham.models.audios.MdlAudiosListResData;
+import com.jalotsav.shreegurudham.retrofitapi.APIGetAudios;
+import com.jalotsav.shreegurudham.retrofitapi.APIRetroBuilder;
 
 import java.util.ArrayList;
 
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Jalotsav on 7/16/2018.
@@ -132,19 +136,49 @@ public class FrgmntAudios extends Fragment implements SwipeRefreshLayout.OnRefre
     // call API for Get Audios List
     private void fetchAudiosData() {
 
-        new Handler().postDelayed(new Runnable() {
+        APIGetAudios apiGetAudios = APIRetroBuilder.getRetroBuilder(true).create(APIGetAudios.class);
+        Call<MdlAudiosListRes> callMdlAudiosList = apiGetAudios.callGetAudios(session.getSelectedLanguage());
+        callMdlAudiosList.enqueue(new Callback<MdlAudiosListRes>() {
             @Override
-            public void run() {
+            public void onResponse(Call<MdlAudiosListRes> call, Response<MdlAudiosListRes> response) {
 
                 mSwiperfrshlyot.setRefreshing(false);
 
-                mArrylstMdlAudios = new ArrayList<>();
-                mArrylstMdlAudios.add(new MdlAudiosListResData(getString(R.string.app_name),
-                        "https://www.sample-videos.com/audio/mp3/crowd-cheering.mp3"));
+                if(response.isSuccessful()) {
 
-                mAdapter = new RcyclrAudiosAdapter(getActivity(), mArrylstMdlAudios);
-                mRecyclerView.setAdapter(mAdapter);
+                    try {
+                        if(response.body().isStatus()) {
+
+                            if(response.body().isShowMsg())
+                                Snackbar.make(mCrdntrlyot, response.body().getMessage(), Snackbar.LENGTH_LONG).show();
+                            else {
+
+                                if(isAdded()) { // to check fragment is attached
+
+                                    mArrylstMdlAudios = new ArrayList<>();
+                                    mArrylstMdlAudios.addAll(response.body().getArrylstMdlAudiosListData());
+                                    mAdapter = new RcyclrAudiosAdapter(getActivity(), mArrylstMdlAudios);
+                                    mRecyclerView.setAdapter(mAdapter);
+                                }
+                            }
+                        } else
+                            Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_LONG).show();
+                    } catch (Exception e) {
+
+                        e.printStackTrace();
+                        Log.e(TAG, "fetchAudiosData() - onResponse: " + e.getMessage());
+                        Snackbar.make(mCrdntrlyot, mInternalPrblmMsg, Snackbar.LENGTH_LONG).show();
+                    }
+                } else
+                    Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_SHORT).show();
             }
-        }, 2000);
+
+            @Override
+            public void onFailure(Call<MdlAudiosListRes> call, Throwable t) {
+
+                mSwiperfrshlyot.setRefreshing(false);
+                Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -18,7 +18,6 @@ package com.jalotsav.shreegurudham.nvgtnvwmain;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -142,8 +141,8 @@ public class FrgmntVideos extends Fragment implements SwipeRefreshLayout.OnRefre
     private void fetchVideosData() {
 
         APIGetVideos apiGetVideos = APIRetroBuilder.getRetroBuilder(true).create(APIGetVideos.class);
-        Call<MdlVideosListRes> callMdlAlbumsImages = apiGetVideos.callGetVideos(session.getSelectedLanguage());
-        callMdlAlbumsImages.enqueue(new Callback<MdlVideosListRes>() {
+        Call<MdlVideosListRes> callMdlVideosList = apiGetVideos.callGetVideos(session.getSelectedLanguage());
+        callMdlVideosList.enqueue(new Callback<MdlVideosListRes>() {
             @Override
             public void onResponse(Call<MdlVideosListRes> call, Response<MdlVideosListRes> response) {
 

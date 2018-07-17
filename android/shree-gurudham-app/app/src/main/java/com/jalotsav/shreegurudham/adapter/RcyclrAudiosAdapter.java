@@ -17,8 +17,11 @@
 package com.jalotsav.shreegurudham.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,10 +65,11 @@ public class RcyclrAudiosAdapter extends RecyclerView.Adapter<RcyclrAudiosAdapte
             @Override
             public void onClick(View view) {
 
-                /*if(!TextUtils.isEmpty(objMdlVideos.getAudioPath())) {
-                    mContext.startActivity(new Intent(mContext, ActvtyPreviewAudio.class)
-                            .putExtra(AppConstants.PUT_EXTRA_AUDIO_URL, objMdlAudios.getAudioPath()));
-                }*/
+                if(!TextUtils.isEmpty(objMdlAudios.getAudioPath())) {
+
+                    mContext.startActivity(new Intent(Intent.ACTION_VIEW)
+                            .setDataAndType(Uri.parse(objMdlAudios.getAudioPath()), "audio/*"));
+                }
             }
         });
     }

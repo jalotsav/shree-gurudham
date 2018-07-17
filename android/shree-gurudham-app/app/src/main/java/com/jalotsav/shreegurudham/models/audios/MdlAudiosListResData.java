@@ -16,18 +16,18 @@
 
 package com.jalotsav.shreegurudham.models.audios;
 
+import com.google.gson.annotations.SerializedName;
+import com.jalotsav.shreegurudham.common.AppConstants;
+
 /**
  * Created by Jalotsav on 7/16/2018.
  */
-public class MdlAudiosListResData {
+public class MdlAudiosListResData implements AppConstants {
 
+    @SerializedName(KEY_AUDIO_TITLE_CAPS)
     private String audioTitle;
+    @SerializedName(KEY_AUDIO_PATH_CAPS)
     private String audioPath;
-
-    public MdlAudiosListResData(String audioTitle, String audioPath) {
-        this.audioTitle = audioTitle;
-        this.audioPath = audioPath;
-    }
 
     public String getAudioTitle() {
         return audioTitle;

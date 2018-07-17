@@ -44,6 +44,8 @@ public interface AppConstants {
     String KEY_VIDEO_PATH_CAPS = "VIDEOPATH";
     String KEY_VIDEO_TITLE_CAPS = "VIDEOTITLE";
     String KEY_YOUTUBE_ID_CAPS = "YOUTUBEID";
+    String KEY_AUDIO_PATH_CAPS = "AUDIO_PATH";
+    String KEY_AUDIO_TITLE_CAPS = "AUDIO_TITLE";
 
     // Web-Service Values
     String VALUE_ABOUT_DEKAWADA = "about_dekawada";
@@ -83,7 +85,7 @@ public interface AppConstants {
     int REQUEST_RECOVERY = 101;
 
     // API Key
-    String API_KEY_YOUTUBE = "AIzaSyAWoyaRh13Z1KEN23tedjCY-4ywXkCTaQ0";
+    String API_KEY_YOUTUBE = "AIzaSyDsW7ppu24mRbYAzRdZpcWKVYJnqkols-g";
 
     // Miscellaneous
     String CONTENT_TYPE_JSON = "Content-Type: application/json";
