@@ -46,6 +46,9 @@
     <string name="aboutus_title_3">શ્રી કાલીદાસજી મહારાજ</string>
     <string name="aboutus_title_4">શ્રી શિવ પાર્થેશ્વર ચિંતામણી મહાપૂજા</string>
 
+    <!--News-->
+    <string name="news_appear_here">સમાચાર અહીં દેખાશે</string>
+
     <!--Images-->
     <string name="images_appear_here">છબીઓ અહીં દેખાશે</string>
 

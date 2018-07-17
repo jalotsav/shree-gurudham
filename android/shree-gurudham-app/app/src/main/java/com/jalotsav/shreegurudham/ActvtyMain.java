@@ -41,6 +41,7 @@ import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntAlbumsImages;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntAudios;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntHome;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntInDevelopment;
+import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntNews;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntVideos;
 
 import java.util.Locale;
@@ -200,7 +201,7 @@ public class ActvtyMain extends AppCompatActivity implements AppConstants,
                 return true;
             case R.id.action_nvgtndrwr_main_news:
 
-                fragment = new FrgmntInDevelopment();
+                fragment = new FrgmntNews();
                 mToolbar.setTitle(getString(R.string.news_sml));
                 loadFragment(fragment, item);
                 return true;
