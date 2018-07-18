@@ -26,12 +26,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.jalotsav.shreegurudham.R;
-import com.jalotsav.shreegurudham.models.home.MdlHomeResData;
+import com.jalotsav.shreegurudham.models.pagecontent.MdlPageCntntHomeSliderImages;
+import com.jalotsav.shreegurudham.models.pagecontent.MdlPageContentHomeGetRes;
 
 import java.util.ArrayList;
 
@@ -41,19 +41,19 @@ import java.util.ArrayList;
 public class VwpgrHomeSliderAdapter extends PagerAdapter {
 
     private Context mContext;
-    private ArrayList<MdlHomeResData> mArrylstMdlHomeResData;
+    private ArrayList<MdlPageCntntHomeSliderImages> mArrylstMdlPageCntntSliderImages;
     private Drawable mDrwblDefault;
 
-    public VwpgrHomeSliderAdapter(Context context, ArrayList<MdlHomeResData> arrylstMdlHomeResData, Drawable drwblDefault) {
+    public VwpgrHomeSliderAdapter(Context context, ArrayList<MdlPageCntntHomeSliderImages> arrylstMdlPageCntntSliderImages, Drawable drwblDefault) {
 
         this.mContext = context;
-        this.mArrylstMdlHomeResData = arrylstMdlHomeResData;
+        this.mArrylstMdlPageCntntSliderImages = arrylstMdlPageCntntSliderImages;
         mDrwblDefault = drwblDefault;
     }
 
     @Override
     public int getCount() {
-        return this.mArrylstMdlHomeResData.size();
+        return this.mArrylstMdlPageCntntSliderImages.size();
     }
 
     @Override
@@ -72,11 +72,11 @@ public class VwpgrHomeSliderAdapter extends PagerAdapter {
 
         try {
 
-            MdlHomeResData objMdlHomeData = mArrylstMdlHomeResData.get(position);
+            MdlPageCntntHomeSliderImages objMdlSliderImages = mArrylstMdlPageCntntSliderImages.get(position);
 
-            if(!TextUtils.isEmpty(objMdlHomeData.getPhotoURL())) {
+            if(!TextUtils.isEmpty(objMdlSliderImages.getImagePath())) {
                 Glide.with(mContext)
-                        .load(objMdlHomeData.getPhotoURL())
+                        .load(objMdlSliderImages.getImagePath())
                         .apply(new RequestOptions().placeholder(mDrwblDefault))
                         .into(mImgvwImage);
             }

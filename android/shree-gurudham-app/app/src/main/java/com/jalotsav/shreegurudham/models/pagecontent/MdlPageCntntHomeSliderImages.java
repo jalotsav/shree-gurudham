@@ -14,20 +14,28 @@
  * limitations under the License.
  */
 
-package com.jalotsav.shreegurudham.models.home;
+package com.jalotsav.shreegurudham.models.pagecontent;
+
+import com.google.gson.annotations.SerializedName;
+import com.jalotsav.shreegurudham.common.AppConstants;
 
 /**
- * Created by Jalotsav on 7/9/2018.
+ * Created by Jalotsav on 7/18/2018.
  */
-public class MdlHomeResData {
+public class MdlPageCntntHomeSliderImages implements AppConstants {
 
-    private String photoURL;
+    @SerializedName(KEY_IMAGE_PATH_CAPS)
+    private String imagePath;
 
-    public MdlHomeResData(String photoURL) {
-        this.photoURL = photoURL;
+    public MdlPageCntntHomeSliderImages(String imagePath) {
+        this.imagePath = imagePath;
     }
 
-    public String getPhotoURL() {
-        return photoURL;
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

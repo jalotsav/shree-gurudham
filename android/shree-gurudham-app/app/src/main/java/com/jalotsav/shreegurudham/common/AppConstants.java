@@ -49,6 +49,9 @@ public interface AppConstants {
     String KEY_NEWS_ID_CAPS = "NEWSID";
     String KEY_NEWS_TITLE_CAPS = "NEWS_TITLE";
     String KEY_NEWS_DESC_CAPS = "NEWSDESC";
+    String KEY_PAGE_TITLE_SML = "page_title";
+    String KEY_MATTER_DESC_SML = "matter_desc";
+    String KEY_SLIDER_IMAGES_SML = "slider_images";
 
     // Web-Service Values
     String VALUE_ABOUT_DEKAWADA = "about_dekawada";

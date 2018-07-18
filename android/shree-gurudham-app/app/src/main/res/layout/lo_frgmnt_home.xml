@@ -19,61 +19,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swiperfrshlyot_frgmnt_home"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vwpgr_frgmnt_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/vwpgr_frgmnt_home_slidrindictr"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32jdp"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/content_bg"
             android:orientation="vertical"
-            android:weightSum="2">
+            android:paddingBottom="@dimen/_8jdp"
+            android:paddingLeft="@dimen/_16jdp"
+            android:paddingRight="@dimen/_16jdp"
+            android:paddingTop="@dimen/_8jdp">
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/tv_frgmnt_home_title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_18jdp"
+                android:textStyle="bold"
+                android:text="@string/home_title_msg" />
 
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/vwpgr_frgmnt_home"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <me.relex.circleindicator.CircleIndicator
-                    android:id="@+id/vwpgr_frgmnt_home_slidrindictr"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_32jdp"
-                    android:layout_alignParentBottom="true" />
-            </RelativeLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_frgmnt_home_descrptn"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/content_bg"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/_8jdp"
-                android:paddingLeft="@dimen/_16jdp"
-                android:paddingRight="@dimen/_16jdp"
-                android:paddingTop="@dimen/_8jdp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_title_msg"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_18jdp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/_8jdp"
-                    android:text="@string/home_descrptn_msg"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_14jdp" />
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:isScrollContainer="true"
+                android:paddingTop="@dimen/_8jdp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_14jdp"
+                android:text="@string/home_descrptn_msg" />
         </LinearLayout>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/prgrsbr_frgmnt_home"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 </android.support.design.widget.CoordinatorLayout>

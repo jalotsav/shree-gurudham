@@ -21,6 +21,7 @@
     <string name="server_problem_sml">There are some server problem.</string>
     <string name="internal_problem_sml">There are some internal problem.</string>
     <string name="youtube_player_error_sml">Error initializing YouTube player: %s</string>
+    <string name="refresh_sml">Refresh</string>
 
     <!--Navigation View-->
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
@@ -40,8 +41,8 @@
     <string name="gujarati_sml">Gujarati</string>
 
     <!--Home-->
-    <string name="home_title_msg">Shri Shiv Shakti Guru-Goudham Anand Ashram Dakawada</string>
-    <string name="home_descrptn_msg">Jagatjan multi-disciple is situated in the Chauvala diocese where Pradyvabavarva is situated in the district of Devtraj in Gurdum Dikawada, Ahmedabad district.</string>
+    <string name="home_title_msg">Welcome To Shree Shiv Shakti Gurudham Anand Ashram Dekawada</string>
+    <string name="home_descrptn_msg">Page content is coming soon..!</string>
 
     <!--About Us-->
     <string name="aboutus_title_1">Anand Ashram</string>

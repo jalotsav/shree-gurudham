@@ -16,6 +16,7 @@
 
 package com.jalotsav.shreegurudham.retrofitapi;
 
+import com.jalotsav.shreegurudham.models.pagecontent.MdlPageContentHomeGetRes;
 import com.jalotsav.shreegurudham.models.pagecontent.MdlPageContentGetRes;
 
 import retrofit2.Call;
@@ -30,4 +31,7 @@ public interface APIPageContent {
     @GET("getPageContent/{languageCode}/{pageKey}")
     Call<MdlPageContentGetRes> callGetPageContent(
             @Path("languageCode") String languageCode, @Path("pageKey") String pageKey);
+
+    @GET("getHomePageContent/{languageCode}")
+    Call<MdlPageContentHomeGetRes> callGetPageContentHome(@Path("languageCode") String languageCode);
 }
