@@ -20,15 +20,20 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -44,23 +49,16 @@ import butterknife.ButterKnife;
 /**
  * Created by Jalotsav on 7/18/2018.
  */
-public class ActvtyNewsDetails extends AppCompatActivity implements AppConstants, PopupMenu.OnMenuItemClickListener {
-
-    private static final String TAG = ActvtyNewsDetails.class.getSimpleName();
+public class ActvtyNewsDetails extends AppCompatActivity implements AppConstants {
 
     UserSessionManager session;
 
-    @BindView(R.id.cordntrlyot_actvty_news_details) CoordinatorLayout mCrdntrlyot;
+    @BindView(R.id.toolbar_actvty_news_details_) Toolbar mToolbar;
     @BindView(R.id.tv_actvty_news_details_headertitle) TextView mTvHeaderTitle;
     @BindView(R.id.tv_actvty_news_details_content) TextView mTvContent;
-    @BindView(R.id.prgrsbr_actvty_news_details) ProgressBar mPrgrsbrMain;
+    @BindView(R.id.lnrlyot_actvty_news_details_content) LinearLayout mLnrlyotContent;
 
-    @BindString(R.string.no_intrnt_cnctn) String mNoInternetConnMsg;
-    @BindString(R.string.server_problem_sml) String mServerPrblmMsg;
-    @BindString(R.string.internal_problem_sml) String mInternalPrblmMsg;
-
-    int mNewsID;
-    String mNewsTitle;
+    String mNewsTitle, mNewsDesc;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,77 +66,63 @@ public class ActvtyNewsDetails extends AppCompatActivity implements AppConstants
         setContentView(R.layout.lo_actvty_news_details);
         ButterKnife.bind(this);
 
-        try {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            setTitle("");
-        } catch (Exception e) { e.printStackTrace(); }
+        setSupportActionBar(mToolbar);
+        ActionBar mActionBar = getSupportActionBar();
+        if (mActionBar != null)
+            mActionBar.setDisplayHomeAsUpEnabled(true);
 
         session = new UserSessionManager(this);
 
-        mNewsID = getIntent().getIntExtra(PUT_EXTRA_NEWS_ID, 0);
         mNewsTitle = getIntent().getStringExtra(PUT_EXTRA_NEWS_TITLE);
+        mNewsDesc = getIntent().getStringExtra(PUT_EXTRA_NEWS_DESC);
 
-        mTvHeaderTitle.setMovementMethod(new ScrollingMovementMethod());
+        // To prevent null value in initCollapsingToolbar()
+        mTvHeaderTitle.setText(getString(R.string.app_name));
+
+        initCollapsingToolbar();
+        setNewsDetailsUI();
+    }
+
+    // Initial CollapsingToolbar
+    private void initCollapsingToolbar() {
+
+        final CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.colpstoolbar_actvty_news_details_);
+        collapsingToolbar.setTitle(" ");
+//        collapsingToolbar.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
+        AppBarLayout appBarLayout = findViewById(R.id.appbarlyot_actvty_news_details);
+        appBarLayout.setExpanded(true);
+
+        // hiding & showing the title when toolbar expanded & collapsed
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = false;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbar.setTitle(mTvHeaderTitle.getText().toString());
+                    isShow = true;
+                } else if (isShow) {
+                    collapsingToolbar.setTitle(" ");
+                    isShow = false;
+                }
+            }
+        });
+    }
+
+    // Set selected News details on UI from Intent extra
+    private void setNewsDetailsUI() {
+
         mTvHeaderTitle.setText(mNewsTitle);
-        mTvContent.setText(mNewsTitle);
-
-        /*if (GeneralFunctions.isNetConnected(this))
-            fetchNewsDetails();
-        else Snackbar.make(mCrdntrlyot, mNoInternetConnMsg, Snackbar.LENGTH_LONG).show();*/
-    }
-
-    // Create LANGUAGES popup menu
-    private void createLanguagesPopupMenu(MenuItem item) {
-
-        View menuItemView = findViewById(item.getItemId());
-        PopupMenu popup = new PopupMenu(this, menuItemView);
-        MenuInflater inflate = popup.getMenuInflater();
-        inflate.inflate(R.menu.menu_languages_item, popup.getMenu());
-        popup.setOnMenuItemClickListener(this);
-        popup.show();
-    }
-
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.action_languages_item_english:
-
-                session.setSelectedLanguage(LANGUAGE_SHORT_ENGLISH);
-                setLanguageToAppLocale();
-                return true;
-            case R.id.action_languages_item_gujarati:
-
-                session.setSelectedLanguage(LANGUAGE_SHORT_GUJARATI);
-                setLanguageToAppLocale();
-                return true;
+        if(TextUtils.isEmpty(mNewsDesc))
+            mLnrlyotContent.setVisibility(View.INVISIBLE);
+        else {
+            mLnrlyotContent.setVisibility(View.VISIBLE);
+            mTvContent.setText(mNewsDesc);
         }
-        return false;
-    }
-
-    // Set selected language to application LOCALE
-    private void setLanguageToAppLocale() {
-
-        session.setLanguageChanged(true);
-        Locale locale = new Locale(session.getSelectedLanguage().toLowerCase());
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
-
-        finish();
-        startActivity(new Intent(this, ActvtyNewsDetails.class)
-                .putExtra(PUT_EXTRA_NEWS_ID, mNewsID)
-                .putExtra(PUT_EXTRA_NEWS_TITLE, mNewsTitle));
-
-        overridePendingTransition(0, 0);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_nvgtnvw_main_overflow, menu);
-        return true;
     }
 
     @Override
@@ -149,10 +133,6 @@ public class ActvtyNewsDetails extends AppCompatActivity implements AppConstants
 
                 onBackPressed();
                 break;
-            case R.id.action_language:
-
-                createLanguagesPopupMenu(item);
-                return true;
             default:
                 break;
         }

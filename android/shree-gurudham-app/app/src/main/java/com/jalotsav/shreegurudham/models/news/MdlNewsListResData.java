@@ -16,18 +16,20 @@
 
 package com.jalotsav.shreegurudham.models.news;
 
+import com.google.gson.annotations.SerializedName;
+import com.jalotsav.shreegurudham.common.AppConstants;
+
 /**
  * Created by Jalotsav on 7/17/2018.
  */
-public class MdlNewsListResData {
+public class MdlNewsListResData implements AppConstants {
 
+    @SerializedName(KEY_NEWS_ID_CAPS)
     private int newsID;
+    @SerializedName(KEY_NEWS_TITLE_CAPS)
     private String newsTitle;
-
-    public MdlNewsListResData(int newsID, String newsTitle) {
-        this.newsID = newsID;
-        this.newsTitle = newsTitle;
-    }
+    @SerializedName(KEY_NEWS_DESC_CAPS)
+    private String newsDesc;
 
     public int getNewsID() {
         return newsID;
@@ -43,5 +45,13 @@ public class MdlNewsListResData {
 
     public void setNewsTitle(String newsTitle) {
         this.newsTitle = newsTitle;
+    }
+
+    public String getNewsDesc() {
+        return newsDesc;
+    }
+
+    public void setNewsDesc(String newsDesc) {
+        this.newsDesc = newsDesc;
     }
 }

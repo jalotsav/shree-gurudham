@@ -48,7 +48,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:textColor="@color/black"
-            android:textSize="@dimen/_18jdp"
+            android:textSize="@dimen/_16jdp"
             tools:text="News Title" />
     </LinearLayout>
 

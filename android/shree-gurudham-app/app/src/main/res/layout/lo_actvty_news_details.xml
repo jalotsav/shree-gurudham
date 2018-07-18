@@ -18,7 +18,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cordntrlyot_actvty_news_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/window_bg"
@@ -31,25 +30,44 @@
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <RelativeLayout
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/colpstoolbar_actvty_news_details_"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_180jdp"
-            android:background="@color/colorPrimary">
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?android:attr/colorPrimary"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleTextAppearance="@android:color/transparent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            tools:ignore="NewApi">
 
-            <TextView
-                android:id="@+id/tv_actvty_news_details_headertitle"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/rubik_light"
-                android:maxLines="3"
-                android:paddingLeft="@dimen/_56jdp"
-                android:paddingRight="@dimen/_56jdp"
-                android:paddingTop="@dimen/_64jdp"
-                android:scrollbars="vertical"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_24jdp"
-                tools:text="News Title" />
-        </RelativeLayout>
+                android:background="@color/colorPrimary">
+
+                <TextView
+                    android:id="@+id/tv_actvty_news_details_headertitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_light"
+                    android:paddingBottom="@dimen/_32jdp"
+                    android:paddingLeft="@dimen/_56jdp"
+                    android:paddingRight="@dimen/_56jdp"
+                    android:paddingTop="@dimen/_56jdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_24jdp"
+                    tools:text="News Title" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_actvty_news_details_"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -59,6 +77,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
+            android:id="@+id/lnrlyot_actvty_news_details_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -89,12 +108,4 @@
             </android.support.v7.widget.CardView>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
-    <ProgressBar
-        android:id="@+id/prgrsbr_actvty_news_details"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
 </android.support.design.widget.CoordinatorLayout>

@@ -46,6 +46,9 @@ public interface AppConstants {
     String KEY_YOUTUBE_ID_CAPS = "YOUTUBEID";
     String KEY_AUDIO_PATH_CAPS = "AUDIO_PATH";
     String KEY_AUDIO_TITLE_CAPS = "AUDIO_TITLE";
+    String KEY_NEWS_ID_CAPS = "NEWSID";
+    String KEY_NEWS_TITLE_CAPS = "NEWS_TITLE";
+    String KEY_NEWS_DESC_CAPS = "NEWSDESC";
 
     // Web-Service Values
     String VALUE_ABOUT_DEKAWADA = "about_dekawada";
@@ -71,8 +74,8 @@ public interface AppConstants {
     String PUT_EXTRA_IMAGE_URL = "imageUrl";
     String PUT_EXTRA_YOUTUBE_VIDEOID = "youtubeVideoID";
     String PUT_EXTRA_AUDIO_URL = "audioUrl";
-    String PUT_EXTRA_NEWS_ID = "newsID";
     String PUT_EXTRA_NEWS_TITLE = "newsTitle";
+    String PUT_EXTRA_NEWS_DESC = "newsDesc";
 
     // NavigationView Drawer MenuItem position check for direct open that fragment
     int NVGTNVW_HOME = 21;

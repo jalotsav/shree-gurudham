@@ -66,8 +66,8 @@ public class RcyclrNewsAdapter extends RecyclerView.Adapter<RcyclrNewsAdapter.Vi
             public void onClick(View view) {
 
                 mContext.startActivity(new Intent(mContext, ActvtyNewsDetails.class)
-                        .putExtra(AppConstants.PUT_EXTRA_NEWS_ID, objMdlNews.getNewsID())
-                        .putExtra(AppConstants.PUT_EXTRA_NEWS_TITLE, objMdlNews.getNewsTitle()));
+                        .putExtra(AppConstants.PUT_EXTRA_NEWS_TITLE, objMdlNews.getNewsTitle())
+                        .putExtra(AppConstants.PUT_EXTRA_NEWS_DESC, objMdlNews.getNewsDesc()));
             }
         });
     }

@@ -166,21 +166,4 @@ public class FrgmntNews extends Fragment implements SwipeRefreshLayout.OnRefresh
             }
         });
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        try {
-
-            UserSessionManager session = new UserSessionManager(getActivity());
-            if (session.isLanguageChanged()) {
-
-                session.setLanguageChanged(false);
-                ((ActvtyMain) getActivity()).setLanguageToAppLocale();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
