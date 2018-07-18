@@ -72,6 +72,7 @@ public interface AppConstants {
     String PUT_EXTRA_YOUTUBE_VIDEOID = "youtubeVideoID";
     String PUT_EXTRA_AUDIO_URL = "audioUrl";
     String PUT_EXTRA_NEWS_ID = "newsID";
+    String PUT_EXTRA_NEWS_TITLE = "newsTitle";
 
     // NavigationView Drawer MenuItem position check for direct open that fragment
     int NVGTNVW_HOME = 21;

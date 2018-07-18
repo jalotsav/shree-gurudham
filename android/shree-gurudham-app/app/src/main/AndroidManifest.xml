@@ -60,6 +60,10 @@
         <activity
             android:name=".ActvtyPreviewVideo"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".ActvtyNewsDetails"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TranslucentActionBar" />
     </application>
 
 </manifest>

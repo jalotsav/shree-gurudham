@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jalotsav.shreegurudham.ActvtyMain;
 import com.jalotsav.shreegurudham.R;
 import com.jalotsav.shreegurudham.adapter.RcyclrNewsAdapter;
 import com.jalotsav.shreegurudham.common.GeneralFunctions;
@@ -164,5 +165,22 @@ public class FrgmntNews extends Fragment implements SwipeRefreshLayout.OnRefresh
                 Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        try {
+
+            UserSessionManager session = new UserSessionManager(getActivity());
+            if (session.isLanguageChanged()) {
+
+                session.setLanguageChanged(false);
+                ((ActvtyMain) getActivity()).setLanguageToAppLocale();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

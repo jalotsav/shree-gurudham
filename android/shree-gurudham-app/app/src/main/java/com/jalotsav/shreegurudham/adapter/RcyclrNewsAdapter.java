@@ -17,6 +17,7 @@
 package com.jalotsav.shreegurudham.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,7 +25,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.jalotsav.shreegurudham.ActvtyNewsDetails;
 import com.jalotsav.shreegurudham.R;
+import com.jalotsav.shreegurudham.common.AppConstants;
 import com.jalotsav.shreegurudham.models.news.MdlNewsListResData;
 
 import java.util.ArrayList;
@@ -62,8 +65,9 @@ public class RcyclrNewsAdapter extends RecyclerView.Adapter<RcyclrNewsAdapter.Vi
             @Override
             public void onClick(View view) {
 
-                /*mContext.startActivity(new Intent(mContext, .class)
-                        .putExtra(AppConstants.PUT_EXTRA_NEWS_ID, objMdlNews.getNewsID()));*/
+                mContext.startActivity(new Intent(mContext, ActvtyNewsDetails.class)
+                        .putExtra(AppConstants.PUT_EXTRA_NEWS_ID, objMdlNews.getNewsID())
+                        .putExtra(AppConstants.PUT_EXTRA_NEWS_TITLE, objMdlNews.getNewsTitle()));
             }
         });
     }
