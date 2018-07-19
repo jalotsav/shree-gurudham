@@ -50,6 +50,23 @@
     <!--News-->
     <string name="news_appear_here">સમાચાર અહીં દેખાશે</string>
 
+    <!--Contact Us-->
+    <string name="sevatrust_name_sml">શ્રી પુરૂષોતમલાલજી મહારાજ ગુરુ સેવા ટ્રસ્ટ</string>
+    <string name="address_line1_sml">શ્રી શિવ-શક્તિ ગુરૂધામ આનંદ આશ્રમ</string>
+    <string name="address_line2_sml">મુ. દેકાવાડા, તા. દેત્રોજ, જી. અમદાવાદ</string>
+    <string name="contact_no1">+૯૧ ૯૮૭૯૧૧૫૬૯૦</string>
+    <string name="contact_no2">+૯૧ ૯૮૨૫૫૭૮૧૨૧ </string>
+    <string name="whatsapp_no1">+૯૧ ૯૭૨૩૩૦૦૨૨૭</string>
+    <string name="fullname_sml">પૂરું નામ</string>
+    <string name="entr_fullname_sml">પૂર્ણ નામ દાખલ કરો</string>
+    <string name="email_sml">ઇમેઇલ</string>
+    <string name="entr_email_sml">ઇમેઇલ દાખલ કરો</string>
+    <string name="invalid_email_sml">અમાન્ય ઇમેઇલ</string>
+    <string name="mobileno_sml">મોબાઈલ નમ્બર</string>
+    <string name="entr_mobileno_sml">મોબાઇલ નંબર દાખલ કરો</string>
+    <string name="comments_sml">ટિપ્પણીઓ</string>
+    <string name="entr_comments_sml">ટિપ્પણીઓ દાખલ કરો</string>
+
     <!--Images-->
     <string name="images_appear_here">છબીઓ અહીં દેખાશે</string>
 

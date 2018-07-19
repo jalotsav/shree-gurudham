@@ -39,6 +39,7 @@ import com.jalotsav.shreegurudham.common.UserSessionManager;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntAboutUs;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntAlbumsImages;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntAudios;
+import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntContactUs;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntHome;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntInDevelopment;
 import com.jalotsav.shreegurudham.nvgtnvwmain.FrgmntNews;
@@ -207,7 +208,7 @@ public class ActvtyMain extends AppCompatActivity implements AppConstants,
                 return true;
             case R.id.action_nvgtndrwr_main_contactus:
 
-                fragment = new FrgmntInDevelopment();
+                fragment = new FrgmntContactUs();
                 mToolbar.setTitle(getString(R.string.contactus_sml));
                 loadFragment(fragment, item);
                 return true;

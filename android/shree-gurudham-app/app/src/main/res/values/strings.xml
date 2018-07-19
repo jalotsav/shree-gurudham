@@ -53,6 +53,23 @@
     <!--News-->
     <string name="news_appear_here">News appear here</string>
 
+    <!--Contact Us-->
+    <string name="sevatrust_name_sml">Shree Purushottamlalji Maharaj Guru Seva Trust</string>
+    <string name="address_line1_sml">Shree Shiv Shakti Gurudham Anand Ashram</string>
+    <string name="address_line2_sml">Dakawada, Ta. Dotrod, Dist. Ahmedabad</string>
+    <string name="contact_no1">+91 9879115690</string>
+    <string name="contact_no2">+91 9825578121</string>
+    <string name="whatsapp_no1">+91 9723300227</string>
+    <string name="fullname_sml">Full name</string>
+    <string name="entr_fullname_sml">Enter Full name</string>
+    <string name="email_sml">Email</string>
+    <string name="entr_email_sml">Enter Email</string>
+    <string name="invalid_email_sml">Invalid Email</string>
+    <string name="mobileno_sml">Mobile No.</string>
+    <string name="entr_mobileno_sml">Enter Mobile number</string>
+    <string name="comments_sml">Comments</string>
+    <string name="entr_comments_sml">Enter Comments</string>
+
     <!--Images-->
     <string name="images_appear_here">Images appear here</string>
 
