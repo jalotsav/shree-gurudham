@@ -15,9 +15,11 @@
   -->
 
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cordntrlyot_frgmnt_home"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/window_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,31 +48,41 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/content_bg"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/_8jdp"
-            android:paddingLeft="@dimen/_16jdp"
-            android:paddingRight="@dimen/_16jdp"
-            android:paddingTop="@dimen/_8jdp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_frgmnt_home_title"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/_18jdp"
-                android:textStyle="bold"
-                android:text="@string/home_title_msg" />
+                android:layout_margin="@dimen/_16jdp"
+                cardview:cardCornerRadius="3dp">
 
-            <TextView
-                android:id="@+id/tv_frgmnt_home_descrptn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:isScrollContainer="true"
-                android:paddingTop="@dimen/_8jdp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/_14jdp"
-                android:text="@string/home_descrptn_msg" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/content_bg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_8jdp">
+
+                    <TextView
+                        android:id="@+id/tv_frgmnt_home_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_title_msg"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/_18jdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_frgmnt_home_descrptn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:isScrollContainer="true"
+                        android:paddingTop="@dimen/_8jdp"
+                        android:text="@string/home_descrptn_msg"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/_14jdp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
     </LinearLayout>
 
