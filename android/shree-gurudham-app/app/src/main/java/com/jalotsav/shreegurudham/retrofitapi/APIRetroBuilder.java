@@ -46,7 +46,7 @@ public class APIRetroBuilder {
             }
 
             OBJ_RETROFIT = new Retrofit.Builder()
-                    .baseUrl(AppConstants.ROOT_URL_API)
+                    .baseUrl(AppConstants.ROOT_URL_API_APISERVICE_SVC)
                     .client(clientBuilder.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

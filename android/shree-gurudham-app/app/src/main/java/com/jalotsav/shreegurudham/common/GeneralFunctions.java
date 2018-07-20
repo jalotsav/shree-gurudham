@@ -17,9 +17,15 @@
 package com.jalotsav.shreegurudham.common;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.text.TextUtils;
 import android.widget.Toast;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Jalotsav on 7/9/2018.
@@ -77,5 +83,45 @@ public class GeneralFunctions {
                 TOAST.show();
                 break;
         }
+    }
+
+    /***
+     * Open native call dialer with given number
+     * ***/
+    public static void openDialerToCall(Context context, String mobileNo) {
+
+        try {
+            context.startActivity(
+                    new Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:" + mobileNo))
+            );
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    /***
+     * Check Email Address Format is valid or not
+     * ***/
+    public static boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
+    /***
+     * Check Mobile Format is valid or not
+     * ***/
+    public static boolean isValidMobile(String target) {
+
+//        String mobile = "^\\(?([0-9]{3})\\)?[-.]?([0-9]{3})[-.]?([0-9]{4})$";
+        String mobile = "^(\\+\\d{1,3}[- ]?)?\\d{10}$";
+        Matcher matcherEmail = Pattern.compile(mobile).matcher(target);
+        return matcherEmail.matches();
+    }
+
+    /***
+     * Check Email Format is valid or not
+     * ***/
+    public static boolean isValidEmail(String str) {
+
+        String reg_Email = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        Matcher matcherEmail = Pattern.compile(reg_Email).matcher(str);
+        return matcherEmail.matches();
     }
 }

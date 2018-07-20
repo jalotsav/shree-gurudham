@@ -60,15 +60,18 @@
     <string name="contact_no1">+91 9879115690</string>
     <string name="contact_no2">+91 9825578121</string>
     <string name="whatsapp_no1">+91 9723300227</string>
+    <string name="send_your_info_sml">Send Your Information</string>
     <string name="fullname_sml">Full name</string>
     <string name="entr_fullname_sml">Enter Full name</string>
     <string name="email_sml">Email</string>
     <string name="entr_email_sml">Enter Email</string>
     <string name="invalid_email_sml">Invalid Email</string>
+    <string name="cntrycode_india">+91</string>
     <string name="mobileno_sml">Mobile No.</string>
     <string name="entr_mobileno_sml">Enter Mobile number</string>
-    <string name="comments_sml">Comments</string>
-    <string name="entr_comments_sml">Enter Comments</string>
+    <string name="invalid_mobile">Invalid mobile number</string>
+    <string name="descrptn_sml">Description</string>
+    <string name="send_sml">Send</string>
 
     <!--Images-->
     <string name="images_appear_here">Images appear here</string>

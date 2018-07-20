@@ -17,7 +17,6 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cordntrlyot_frgmnt_contactus"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,6 +33,7 @@
             android:orientation="vertical"
             android:padding="@dimen/_8jdp">
 
+            <!--START Address Details-->
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,16 +50,24 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@string/sevatrust_name_sml"
+                        android:paddingBottom="@dimen/_5jdp"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/_16jdp"
-                        android:textStyle="bold"
-                        android:text="@string/sevatrust_name_sml" />
+                        android:textStyle="bold" />
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1jdp"
+                        android:background="@color/colorPrimaryTrsprnt50" />
+
+                    <!--Address-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5jdp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/_8jdp"
+                        android:paddingTop="@dimen/_8jdp">
 
                         <ImageView
                             android:layout_width="@dimen/_20jdp"
@@ -71,29 +79,255 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/_8jdp"
                             android:layout_marginLeft="@dimen/_16jdp"
-                            android:layout_marginRight="@dimen/_8jdp"
                             android:layout_marginStart="@dimen/_16jdp"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:text="@string/address_line1_sml"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:textSize="@dimen/_14jdp"
-                                android:text="@string/address_line1_sml" />
+                                android:textSize="@dimen/_14jdp" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:text="@string/address_line2_sml"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:textSize="@dimen/_14jdp"
-                                android:text="@string/address_line2_sml" />
+                                android:textSize="@dimen/_14jdp" />
                         </LinearLayout>
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1jdp"
+                        android:layout_marginLeft="@dimen/_36jdp"
+                        android:layout_marginStart="@dimen/_36jdp"
+                        android:background="@color/colorPrimaryTrsprnt50" />
+
+                    <!--Mobile No.-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/_8jdp"
+                        android:paddingTop="@dimen/_8jdp">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20jdp"
+                            android:layout_height="@dimen/_20jdp"
+                            android:contentDescription="@string/imgcd_image"
+                            android:tint="@color/colorPrimaryDarkBlue"
+                            app:srcCompat="@drawable/ic_phone_black_24dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_16jdp"
+                            android:layout_marginStart="@dimen/_16jdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/contact_no1"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="@dimen/_14jdp" />
+
+                            <View
+                                android:layout_width="@dimen/_1jdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_5jdp"
+                                android:layout_marginRight="@dimen/_5jdp"
+                                android:background="@color/colorPrimaryTrsprnt50" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/contact_no2"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="@dimen/_14jdp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1jdp"
+                        android:layout_marginLeft="@dimen/_36jdp"
+                        android:layout_marginStart="@dimen/_36jdp"
+                        android:background="@color/colorPrimaryTrsprnt50" />
+
+                    <!--WhatsApp No.-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/_8jdp"
+                        android:paddingTop="@dimen/_8jdp">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20jdp"
+                            android:layout_height="@dimen/_20jdp"
+                            android:contentDescription="@string/imgcd_image"
+                            app:srcCompat="@drawable/ic_whatsapp_colorful" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_16jdp"
+                            android:layout_marginStart="@dimen/_16jdp"
+                            android:text="@string/whatsapp_no1"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/_14jdp" />
+                    </LinearLayout>
+
+                    <!--Map-->
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_2jdp"
+                        cardview:cardCornerRadius="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/content_bg"
+                            android:orientation="vertical">
+
+                            <!--CustomMapView - To manage ScrollView and MapView scroll-->
+                            <com.jalotsav.shreegurudham.common.CustomMapView
+                                android:id="@+id/mapvw_frgmnt_contactus_location"
+                                class="com.google.android.gms.maps.SupportMapFragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_120jdp" />
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+            <!--END Address Details-->
+
+            <!--START Send your Information-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2jdp"
+                android:layout_marginBottom="@dimen/_8jdp"
+                android:layout_marginLeft="@dimen/_8jdp"
+                android:layout_marginRight="@dimen/_8jdp"
+                cardview:cardCornerRadius="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/content_bg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_8jdp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/send_your_info_sml"
+                        android:paddingBottom="@dimen/_5jdp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/_16jdp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1jdp"
+                        android:background="@color/colorPrimaryTrsprnt50" />
+
+                    <!--Full Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/txtinputlyot_frgmnt_contactus_fullname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10jdp">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/txtinptet_frgmnt_contactus_fullname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/fullname_sml"
+                            android:inputType="textPersonName"
+                            android:textColorHint="@color/grayA8"
+                            android:textSize="@dimen/_14jdp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Email-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/txtinputlyot_frgmnt_contactus_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/txtinptet_frgmnt_contactus_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/email_sml"
+                            android:inputType="textEmailAddress"
+                            android:textColorHint="@color/grayA8"
+                            android:textSize="@dimen/_14jdp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Mobile No.-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/txtinputlyot_frgmnt_contactus_mobileno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/txtinptet_frgmnt_contactus_mobileno"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/mobileno_sml"
+                            android:inputType="phone"
+                            android:maxLength="14"
+                            android:text="@string/cntrycode_india"
+                            android:textColorHint="@color/grayA8"
+                            android:textSize="@dimen/_14jdp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Description-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/txtinputlyot_frgmnt_contactus_descrptn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/txtinptet_frgmnt_contactus_descrptn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/descrptn_sml"
+                            android:inputType="textMultiLine"
+                            android:minLines="3"
+                            android:maxLines="5"
+                            android:textColorHint="@color/grayA8"
+                            android:textSize="@dimen/_14jdp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Send-->
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/appcmptbtn_frgmnt_contactus_send"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5jdp"
+                        android:text="@string/send_sml"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <!--END Send your Information-->
         </LinearLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/prgrsbr_frgmnt_contactus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 </android.support.design.widget.CoordinatorLayout>

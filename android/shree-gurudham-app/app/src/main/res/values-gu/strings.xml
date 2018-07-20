@@ -57,15 +57,18 @@
     <string name="contact_no1">+૯૧ ૯૮૭૯૧૧૫૬૯૦</string>
     <string name="contact_no2">+૯૧ ૯૮૨૫૫૭૮૧૨૧ </string>
     <string name="whatsapp_no1">+૯૧ ૯૭૨૩૩૦૦૨૨૭</string>
+    <string name="send_your_info_sml">આપની માહિતી મોકલો</string>
     <string name="fullname_sml">પૂરું નામ</string>
     <string name="entr_fullname_sml">પૂર્ણ નામ દાખલ કરો</string>
     <string name="email_sml">ઇમેઇલ</string>
     <string name="entr_email_sml">ઇમેઇલ દાખલ કરો</string>
     <string name="invalid_email_sml">અમાન્ય ઇમેઇલ</string>
+    <string name="cntrycode_india">+૯૧</string>
     <string name="mobileno_sml">મોબાઈલ નમ્બર</string>
     <string name="entr_mobileno_sml">મોબાઇલ નંબર દાખલ કરો</string>
-    <string name="comments_sml">ટિપ્પણીઓ</string>
-    <string name="entr_comments_sml">ટિપ્પણીઓ દાખલ કરો</string>
+    <string name="invalid_mobile">અમાન્ય મોબાઇલ નંબર</string>
+    <string name="descrptn_sml">વર્ણન</string>
+    <string name="send_sml">મોકલો</string>
 
     <!--Images-->
     <string name="images_appear_here">છબીઓ અહીં દેખાશે</string>

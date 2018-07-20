@@ -97,6 +97,7 @@
     <color name="greenSpeech">#03A678</color>
     <color name="yellowSunflwr">#F1C40F</color>
     <color name="yellowSnackbar">#F4B400</color>
+    <color name="colorPrimaryTrsprnt50">#50D32F2F</color>
 
     <!--Use in App-->
     <color name="window_bg">#F8EBBE</color>

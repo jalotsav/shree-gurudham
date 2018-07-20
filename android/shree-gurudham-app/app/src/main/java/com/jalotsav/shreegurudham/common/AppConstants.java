@@ -21,12 +21,10 @@ package com.jalotsav.shreegurudham.common;
  */
 public interface AppConstants {
 
-    // Build Type
-    String BUILD_TYPE_DEBUG = "debug";
-
     // URLs - Root, API
-    String ROOT_URL_API = "http://www.shreegurudham.com/apis/ApiService.svc/";
-    String ROOT_URL_YOUTUBE = "https://www.youtube.com/watch?v=";
+    String ROOT_URL_API = "http://www.shreegurudham.com/apis/";
+    String ROOT_URL_API_APISERVICE_SVC = ROOT_URL_API + "ApiService.svc/";
+    String API_DEFAULT_ASPX = "Default.aspx";
     String ROOT_URL_YOUTUBE_THUMBNAIL = "https://img.youtube.com/vi/";
 
     // Web-Service Keys
@@ -52,12 +50,18 @@ public interface AppConstants {
     String KEY_PAGE_TITLE_SML = "page_title";
     String KEY_MATTER_DESC_SML = "matter_desc";
     String KEY_SLIDER_IMAGES_SML = "slider_images";
+    String KEY_API_KEY = "apikey";
+    String KEY_NAME = "name";
+    String KEY_EMAIL = "email";
+    String KEY_CONTACT_NO = "contactno";
+    String KEY_DESCRIPTION = "description";
 
     // Web-Service Values
     String VALUE_ABOUT_DEKAWADA = "about_dekawada";
     String VALUE_ABOUT_SHREEGURUJI = "about_shreeguruji";
     String VALUE_ABOUT_SHREEBAPU = "about_shreebapu";
     String VALUE_ABOUT_SHIVPOOJA = "about_shivpooja";
+    String VALUE_INQUIRY = "inquiry";
 
     // User session manager Keys
     String KEY_SELECTED_LANGUAGE = "selectedLanguage";
@@ -94,6 +98,10 @@ public interface AppConstants {
 
     // API Key
     String API_KEY_YOUTUBE = "AIzaSyDsW7ppu24mRbYAzRdZpcWKVYJnqkols-g";
+
+    // Latitude - Longitude of MAP
+    String MAP_LATITUDE_CONTACTUS = "23.345583";
+    String MAP_LONGITUDE_CONTACTUS = "72.148167";
 
     // Miscellaneous
     String CONTENT_TYPE_JSON = "Content-Type: application/json";
