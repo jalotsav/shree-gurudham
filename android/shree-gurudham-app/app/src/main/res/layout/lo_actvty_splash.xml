@@ -27,7 +27,7 @@
         android:layout_width="@dimen/_180jdp"
         android:layout_height="@dimen/_180jdp"
         android:contentDescription="@string/imgcd_image"
-        android:src="@drawable/img_logo_shreegurudham_web" />
+        android:src="@drawable/img_logo_highres" />
 
     <TextView
         android:layout_width="wrap_content"
