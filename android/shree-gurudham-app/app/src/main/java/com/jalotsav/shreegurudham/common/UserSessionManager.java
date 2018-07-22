@@ -26,7 +26,7 @@ public class UserSessionManager implements AppConstants {
     // Get-Set Selected Language to SharedPreferences
     public String getSelectedLanguage() {
 
-        return pref.getString(KEY_SELECTED_LANGUAGE, LANGUAGE_SHORT_ENGLISH);
+        return pref.getString(KEY_SELECTED_LANGUAGE, LANGUAGE_SHORT_GUJARATI);
     }
 
     public void setSelectedLanguage(String selectedLanguage) {
