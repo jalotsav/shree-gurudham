@@ -16,6 +16,8 @@
 
 package com.jalotsav.shreegurudham;
 
+import android.app.Dialog;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,16 +25,19 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jalotsav.shreegurudham.adapter.RcyclrImagesListAdapter;
+import com.jalotsav.shreegurudham.adapter.VwpgrPreviewImageSliderAdapter;
 import com.jalotsav.shreegurudham.common.AppConstants;
 import com.jalotsav.shreegurudham.common.GeneralFunctions;
 import com.jalotsav.shreegurudham.common.RecyclerViewEmptySupport;
@@ -76,6 +81,9 @@ public class ActvtyImagesList extends AppCompatActivity implements SwipeRefreshL
     RecyclerView.LayoutManager mLayoutManager;
     RcyclrImagesListAdapter mAdapter;
     ArrayList<MdlImagesListResData> mArrylstMdlImages;
+    Dialog mDialogSliderImages;
+    ViewPager mvwpgrSliderImages;
+    VwpgrPreviewImageSliderAdapter mAdptrVwpgr;
 
     int mAlbumID;
     String mAlbumName;
@@ -110,6 +118,8 @@ public class ActvtyImagesList extends AppCompatActivity implements SwipeRefreshL
         mAdapter = new RcyclrImagesListAdapter(this, mArrylstMdlImages, mDrwblDefault);
         mRecyclerView.setAdapter(mAdapter);
 
+        initPreviewImageDialog();
+
         callOnRefresh();
     }
 
@@ -122,6 +132,16 @@ public class ActvtyImagesList extends AppCompatActivity implements SwipeRefreshL
                 ContextCompat.getColor(this, R.color.colorPrimaryRed),
                 ContextCompat.getColor(this, R.color.colorPrimaryBlue),
                 ContextCompat.getColor(this, R.color.colorPrimaryOrange));
+    }
+
+    // Initialization of Preview Image Dialog
+    private void initPreviewImageDialog() {
+
+        mDialogSliderImages = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        mDialogSliderImages.setContentView(R.layout.lo_dialog_preview_image);
+        mDialogSliderImages.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        mvwpgrSliderImages = mDialogSliderImages.findViewById(R.id.vwpgr_dialog_prevwimage);
     }
 
     // call onRefresh method without swipe gesture
@@ -166,6 +186,9 @@ public class ActvtyImagesList extends AppCompatActivity implements SwipeRefreshL
                                 mArrylstMdlImages.addAll(response.body().getArrylstMdlImagesListData());
                                 mAdapter = new RcyclrImagesListAdapter(ActvtyImagesList.this, mArrylstMdlImages, mDrwblDefault);
                                 mRecyclerView.setAdapter(mAdapter);
+
+                                mAdptrVwpgr = new VwpgrPreviewImageSliderAdapter(ActvtyImagesList.this, mAdapter.getAllItems(), mDrwblDefault);
+                                mvwpgrSliderImages.setAdapter(mAdptrVwpgr);
                             }
                         } else
                             Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_LONG).show();
@@ -186,6 +209,17 @@ public class ActvtyImagesList extends AppCompatActivity implements SwipeRefreshL
                 Snackbar.make(mCrdntrlyot, mServerPrblmMsg, Snackbar.LENGTH_SHORT).show();
             }
         });
+    }
+
+    // Set current position of Preview Image dialog view pager
+    public void setPreviewImageDialogCurrentItem(int position) {
+
+        if(!mDialogSliderImages.isShowing()) {
+
+            mDialogSliderImages.show();
+            if (mAdptrVwpgr != null)
+                mvwpgrSliderImages.setCurrentItem(position);
+        }
     }
 
     @Override

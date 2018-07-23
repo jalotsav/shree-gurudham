@@ -17,7 +17,6 @@
 package com.jalotsav.shreegurudham.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -29,9 +28,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.jalotsav.shreegurudham.ActvtyPreviewImage;
+import com.jalotsav.shreegurudham.ActvtyImagesList;
 import com.jalotsav.shreegurudham.R;
-import com.jalotsav.shreegurudham.common.AppConstants;
 import com.jalotsav.shreegurudham.models.images.MdlImagesListResData;
 
 import java.util.ArrayList;
@@ -63,7 +61,7 @@ public class RcyclrImagesListAdapter extends RecyclerView.Adapter<RcyclrImagesLi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
         final String imageURL = mArrylstImages.get(position).getImagePath();
         if(!TextUtils.isEmpty(imageURL)) {
@@ -77,8 +75,7 @@ public class RcyclrImagesListAdapter extends RecyclerView.Adapter<RcyclrImagesLi
             @Override
             public void onClick(View view) {
 
-                mContext.startActivity(new Intent(mContext, ActvtyPreviewImage.class)
-                        .putExtra(AppConstants.PUT_EXTRA_IMAGE_URL, imageURL));
+                ((ActvtyImagesList) mContext).setPreviewImageDialogCurrentItem(position);
             }
         });
     }
@@ -99,5 +96,9 @@ public class RcyclrImagesListAdapter extends RecyclerView.Adapter<RcyclrImagesLi
             this.mItemView = itemView;
             mImgvwImage = itemView.findViewById(R.id.imgvw_recylrvw_item_images_list_image);
         }
+    }
+
+    public ArrayList<MdlImagesListResData> getAllItems() {
+        return this.mArrylstImages;
     }
 }
